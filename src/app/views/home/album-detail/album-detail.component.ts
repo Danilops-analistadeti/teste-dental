@@ -29,7 +29,7 @@ export class AlbumDetailComponent implements OnInit {
 
   getAlbumDetail(albumId: number): void {
     this.albumService.getAlbumDetail().subscribe({
-      next: resp => this.detailAlbums = resp.filter(f => f.albumId === albumId)
+      next: resp => this.detailAlbums = resp.filter(f => f.albumId === albumId).slice(0, 10)
     })
   }
 
