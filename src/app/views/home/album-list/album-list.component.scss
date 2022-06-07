@@ -1,0 +1,18 @@
+.album-list {
+    background-color: #2f9cf3;
+    display: flex;
+    justify-content: center;
+
+    &__items {
+        display: grid;
+        grid-template-columns: 200px 200px 200px 200px;
+    }
+
+    &__detail {
+        max-width: 200px;
+        max-height: 400px;
+        margin: 20px;
+        cursor: pointer;
+    }
+}
+

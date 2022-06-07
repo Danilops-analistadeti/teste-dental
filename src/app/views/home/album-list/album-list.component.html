@@ -1,0 +1,10 @@
+<div class="album-list">
+  <div class="album-list__items">
+    <mat-card class="album-list__detail" *ngFor="let album of listAlbums" (click)="redirectDetail(album.id)">
+      <mat-card-header>
+        <mat-card-title>{{album.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="getMiniatureUrl(album.id)" alt="">
+    </mat-card>
+  </div>
+</div>

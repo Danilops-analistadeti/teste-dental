@@ -1,5 +1,0 @@
-export const STEPPER_NUMBER_ENERGY = 0;
-export const STEPPER_NUMBER_CUSTOMIZATION = 1;
-export const STEPPER_NUMBER_FINANCIAL = 2;
-export const STEPPER_NUMBER_REGISTRATION = 3;
-export const DISABLED = true;

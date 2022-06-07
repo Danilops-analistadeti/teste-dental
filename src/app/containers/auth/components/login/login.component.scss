@@ -1,0 +1,22 @@
+.login {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: #2f9cf3;
+    justify-content: center;
+    align-items: center;
+
+    &__form {
+        width: 300px;
+    }
+
+    &__logo {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.mat-card {
+    background-color: #90a8a9;
+}

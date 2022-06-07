@@ -1,0 +1,10 @@
+<div class="album-detail">
+    <div class="album-detail__items">
+        <mat-card class="album-detail__detail" *ngFor="let album of detailAlbums">
+            <mat-card-header>
+                <mat-card-title>{{album.title}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="album.url" alt="">
+        </mat-card>
+    </div>
+</div>

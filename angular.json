@@ -1,116 +1,62 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "newProjectRoot": "projects",
   "projects": {
-    "energy-contracting": {
-      "projectType": "library",
-      "root": "libs/energy-contracting",
-      "sourceRoot": "libs/energy-contracting/src",
-      "prefix": "lib",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/energy-contracting"],
-          "options": {
-            "jestConfig": "libs/energy-contracting/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/energy-contracting/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "create-quotation": {
+    "angular-dental": {
       "projectType": "application",
-      "schematics": { "@schematics/angular:component": { "style": "scss" } },
-      "root": "apps/create-quotation",
-      "sourceRoot": "apps/create-quotation/src",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "ngx-build-plus:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/create-quotation",
-            "index": "apps/create-quotation/src/index.html",
-            "main": "apps/create-quotation/src/main.ts",
-            "polyfills": "apps/create-quotation/src/polyfills.ts",
-            "tsConfig": "apps/create-quotation/tsconfig.app.json",
+            "outputPath": "dist/angular-dental",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/create-quotation/src/favicon.ico", "apps/create-quotation/src/assets"],
-            "styles": ["apps/create-quotation/src/styles.scss"],
-            "scripts": [],
-            "extraWebpackConfig": "apps/create-quotation/webpack.config.js",
-            "commonChunk": false
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "fileReplacements": [
                 {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/create-quotation/webpack.prod.config.js"
-            },
-            "hml": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "10mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.hml.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/create-quotation/webpack.prod.config.js"
-            },
-            "tst": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.tst.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/create-quotation/webpack.prod.config.js"
+              "outputHashing": "all"
             },
             "development": {
               "buildOptimizer": false,
@@ -119,634 +65,49 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
-            },
-            "local": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.local.ts"
-                }
-              ],
-              "optimization": false,
-              "sourceMap": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "ngx-build-plus:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "create-quotation:build:production",
-              "extraWebpackConfig": "apps/create-quotation/webpack.prod.config.js"
+              "browserTarget": "angular-dental:build:production"
             },
             "development": {
-              "browserTarget": "create-quotation:build:development"
-            },
-            "local": {
-              "browserTarget": "create-quotation:build:local"
-            },
-            "tst": {
-              "browserTarget": "create-quotation:build:tst"
-            },
-            "hml": {
-              "browserTarget": "create-quotation:build:hml"
+              "browserTarget": "angular-dental:build:development"
             }
           },
-          "defaultConfiguration": "development",
-          "options": {
-            "extraWebpackConfig": "apps/create-quotation/webpack.prod.config.js",
-            "port": 3000
-          }
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": { "browserTarget": "create-quotation:build" }
+          "options": {
+            "browserTarget": "angular-dental:build"
+          }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/create-quotation"],
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "jestConfig": "apps/create-quotation/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/create-quotation/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "hiring-proposal": {
-      "projectType": "application",
-      "schematics": { "@schematics/angular:component": { "style": "scss" } },
-      "root": "apps/hiring-proposal",
-      "sourceRoot": "apps/hiring-proposal/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "ngx-build-plus:browser",
-          "options": {
-            "outputPath": "dist/hiring-proposal",
-            "index": "apps/hiring-proposal/src/index.html",
-            "main": "apps/hiring-proposal/src/main.ts",
-            "polyfills": "apps/hiring-proposal/src/polyfills.ts",
-            "tsConfig": "apps/hiring-proposal/tsconfig.app.json",
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/hiring-proposal/src/favicon.ico", "apps/hiring-proposal/src/assets"],
-            "styles": ["apps/hiring-proposal/src/styles.scss"],
-            "scripts": [],
-            "extraWebpackConfig": "apps/hiring-proposal/webpack.config.js",
-            "commonChunk": false
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/hiring-proposal/webpack.prod.config.js"
-            },
-            "tst": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.tst.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/hiring-proposal/webpack.prod.config.js"
-            },
-            "hml": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "10mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.hml.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/hiring-proposal/webpack.prod.config.js"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            },
-            "local": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.local.ts"
-                }
-              ],
-              "optimization": false,
-              "sourceMap": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "ngx-build-plus:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "hiring-proposal:build:production",
-              "extraWebpackConfig": "apps/hiring-proposal/webpack.prod.config.js"
-            },
-            "development": {
-              "browserTarget": "hiring-proposal:build:development"
-            },
-            "local": {
-              "browserTarget": "hiring-proposal:build:local"
-            }
-          },
-          "defaultConfiguration": "development",
-          "options": {
-            "extraWebpackConfig": "apps/hiring-proposal/webpack.config.js",
-            "port": 3100
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": { "browserTarget": "hiring-proposal:build" }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/hiring-proposal"],
-          "options": {
-            "jestConfig": "apps/hiring-proposal/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/hiring-proposal/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "shell": {
-      "projectType": "application",
-      "schematics": { "@schematics/angular:component": { "style": "scss" } },
-      "root": "apps/shell",
-      "sourceRoot": "apps/shell/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "ngx-build-plus:browser",
-          "options": {
-            "outputPath": "dist/shell",
-            "index": "apps/shell/src/index.html",
-            "main": "apps/shell/src/main.ts",
-            "polyfills": "apps/shell/src/polyfills.ts",
-            "tsConfig": "apps/shell/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets"],
-            "styles": ["apps/shell/src/styles.scss"],
-            "scripts": [],
-            "extraWebpackConfig": "apps/shell/webpack.config.js",
-            "commonChunk": false
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "extraWebpackConfig": "apps/shell/webpack.prod.config.js"
-            },
-            "hml": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.hml.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "10mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "extraWebpackConfig": "apps/shell/webpack.prod.config.js"
-            },
-            "tst": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.tst.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "extraWebpackConfig": "apps/shell/webpack.prod.config.js"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            },
-            "local": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.local.ts"
-                }
-              ],
-              "optimization": false,
-              "sourceMap": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "ngx-build-plus:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "shell:build:production",
-              "extraWebpackConfig": "apps/shell/webpack.prod.config.js"
-            },
-            "development": { "browserTarget": "shell:build:development" },
-            "local": { "browserTarget": "shell:build:local" }
-          },
-          "defaultConfiguration": "development",
-          "options": {
-            "extraWebpackConfig": "apps/shell/webpack.config.js",
-            "port": 4200
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": { "browserTarget": "shell:build" }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/shell"],
-          "options": {
-            "jestConfig": "apps/shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/shell/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "auth-lib": {
-      "projectType": "library",
-      "root": "libs/auth-lib",
-      "sourceRoot": "libs/auth-lib/src",
-      "prefix": "lib",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/shell"],
-          "options": {
-            "jestConfig": "apps/auth-lib/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/auth-lib/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "auth": {
-      "projectType": "application",
-      "schematics": { "@schematics/angular:component": { "style": "scss" } },
-      "root": "apps/auth",
-      "sourceRoot": "apps/auth/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "ngx-build-plus:browser",
-          "options": {
-            "outputPath": "dist/auth",
-            "index": "apps/auth/src/index.html",
-            "main": "apps/auth/src/main.ts",
-            "polyfills": "apps/auth/src/polyfills.ts",
-            "tsConfig": "apps/auth/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": ["apps/auth/src/favicon.ico", "apps/auth/src/assets"],
-            "styles": ["apps/auth/src/styles.scss"],
-            "scripts": [],
-            "extraWebpackConfig": "apps/auth/webpack.config.js",
-            "commonChunk": false
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/auth/webpack.prod.config.js"
-            },
-            "hml": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "10mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.hml.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/auth/webpack.prod.config.js"
-            },
-            "tst": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.tst.ts"
-                }
-              ],
-              "outputHashing": "all",
-              "extraWebpackConfig": "apps/auth/webpack.prod.config.js"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            },
-            "local": {
-              "fileReplacements": [
-                {
-                  "replace": "environments/environment.ts",
-                  "with": "environments/environment.local.ts"
-                }
-              ],
-              "optimization": false,
-              "sourceMap": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "ngx-build-plus:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "auth:build:production",
-              "extraWebpackConfig": "apps/auth/webpack.prod.config.js"
-            },
-            "development": {
-              "browserTarget": "auth:build:development"
-            },
-            "local": {
-              "browserTarget": "auth:build:local"
-            },
-            "tst": {
-              "browserTarget": "auth:build:tst"
-            }
-          },
-          "defaultConfiguration": "development",
-          "options": {
-            "extraWebpackConfig": "apps/auth/webpack.config.js",
-            "port": 3300
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": { "browserTarget": "auth:build" }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/auth"],
-          "options": {
-            "jestConfig": "apps/auth/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/auth/**/*.{js,ts}"]
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
+            ],
+            "scripts": []
           }
         }
       }
     }
   },
-  "cli": {
-    "analytics": "ab80785f-11da-4ef4-b708-b7b17498425c",
-    "defaultCollection": "@nrwl/angular"
-  },
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
-    },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
-    }
-  },
-  "defaultProject": "shell"
+  "defaultProject": "angular-dental"
 }
