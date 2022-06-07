@@ -1,0 +1,59 @@
+<div class="box__header mb-2">
+  <div class="box__column--expand-column"></div>
+  <div class="box__column--no-sort">
+    <span>status</span>
+    <mat-icon [matTooltip]="statusTooltip">info</mat-icon>
+  </div>
+  <div class="box__column--no-sort">
+    <span>timer</span>
+    <mat-icon
+      matTooltip="O timer apresenta o tempo que a cotação permanecerá no referido status. Ao final da contagem a cotação assumirá o próximo status.">
+      info
+    </mat-icon>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="protocol" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>protocolo</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="owner.fantasyName" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>solicitante</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="quotationType" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>operação</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="subMarketRegion" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>submercado</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="energySource" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>fonte</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="startDate" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>período</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="priceType" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>
+        tipo
+      </span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column">
+    <ec-quotation-sort-header id="energyVolumeAverage" (sortChange)="sorted($event)" [active]="sort?.active">
+      <span>MW Médios</span>
+    </ec-quotation-sort-header>
+  </div>
+  <div class="box__column--no-sort">
+    <span>ofertas</span>
+  </div>
+</div>

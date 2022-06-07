@@ -1,0 +1,28 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+
+
+.expand {
+  justify-self: end;
+  line-height: 18px;
+  transition: transform 500ms;
+  user-select: none;
+  outline: none;
+
+  &--expanded {
+    transform: rotate(90deg);
+  }
+}
+
+.item {
+  &--border {
+    border-right: 1px solid #e1e1e1;
+    font-weight: 500;
+  }
+  &--bold {
+    text-align: left;
+    padding-left: 15px;
+    font-weight: $bold;
+    font-size: $primary-fs;
+  }
+}

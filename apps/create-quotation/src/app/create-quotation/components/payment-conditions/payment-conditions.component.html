@@ -1,0 +1,150 @@
+<ng-template #loadingTpl>
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <es-loading [active]="true"></es-loading>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="payment-conditions">
+  <form [formGroup]="paymentsConditionsForm" (ngSubmit)="nextForm()" (keyup.enter)="nextForm()">
+    <h1>Condições de pagamento</h1>
+
+    <div class="row">
+      <div class="col-5">
+        <mat-form-field appearance="outline">
+          <mat-label>Indexador de reajuste</mat-label>
+          <mat-select formControlName="indexer" required id="indexer">
+            <mat-option *ngFor="let index of resources.indexer" [value]="index.value">
+              {{index.value}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="paymentsConditionsForm.get('indexer').hasError('required')">
+            Indexador de reajuste é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Dia do pagamento</mat-label>
+          <mat-select formControlName="paymentBusinessDay" required id="paymentBusinessDay">
+            <mat-option *ngFor="let business of businessDay" [value]="business">
+              {{business}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="paymentsConditionsForm.get('paymentBusinessDay').hasError('required')">
+            Dia de pagamento é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3 d-flex align-items-center justify-content-around">
+        <mat-radio-group formControlName="paymentDayType">
+          <mat-radio-button tabindex="11" value="WORKING_DAY">Útil</mat-radio-button>
+          <mat-radio-button tabindex="12" value="CONSECUTIVE_DAY">Corrido</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-1 d-flex justify-content-end">
+        <mat-icon class="payment-conditions--icon-cerise">info</mat-icon>
+      </div>
+      <div class="col-8">
+        <ng-container [ngSwitch]="(paymentsConditionsForm.get('indexer').value)?.key">
+          <span class="payment-conditions--reajust" *ngSwitchCase="'NONE'">
+            O preço negociado nesta cotação não sofrerá nenhum reajuste.
+          </span>
+
+          <span class="payment-conditions--reajust" *ngSwitchDefault>
+            Reajustes serão aplicados no inicio do ano de fornecimento, correspondente ao mês de Janeiro,
+            e posteriormente a cada 12 meses, calculados pelo
+            <b>{{paymentsConditionsForm.get('indexer')?.value?.value}}</b>
+            a partir dadata de abertura da cotação, data base de
+            <b>{{minDate | date:'MMMyy' | esReplace:'[ .]':'/'}}.</b>
+          </span>
+        </ng-container>
+      </div>
+    </div>
+
+    <h1>Infos de faturamento</h1>
+
+    <ng-container *ngIf="!isMultiplesPayments; else multipleAgents">
+
+      <div class="mt-2" *ngIf="!loading?.getClients; else loadingTpl">
+        <ng-container *ngIf="clients?.length; else noBillingInfo">
+          <div class="payment-conditions__header mb-2">
+            <div></div>
+            <div>
+              <span>Nome da unidade</span>
+            </div>
+            <div>
+              <span>CNPJ</span>
+            </div>
+            <div>
+              <span>Banco</span>
+            </div>
+            <div>
+              <span>Agência</span>
+            </div>
+            <div>
+              <span>Conta</span>
+            </div>
+          </div>
+
+          <div class="payment-conditions__card">
+            <es-card-item [columns]="item" [headerColumns]="billingColumns" (selectedItems)="selectBillingInfo($event)"
+              key="id" *ngFor="let item of clients" [showSelect]="true" [disabledExpanded]="true"
+              [selected]="paymentsConditionsForm.get('billingInfo').value"
+              [ngStyleGridColumn]="'40px repeat(auto-fit,minmax(90px, 3fr))'">
+
+              <es-card-column columnName="name">
+                <ng-template let-columns="item">
+                  <span class="payment-conditions--bold">{{item.name}}</span>
+                </ng-template>
+              </es-card-column>
+
+              <es-card-column columnName="cnpj">
+                <ng-template let-columns="item">
+                  <span>{{item.cnpj | mask: '00.000.000/0000-00'}}</span>
+                </ng-template>
+              </es-card-column>
+            </es-card-item>
+          </div>
+
+          <div class="payment-conditions--text-end">
+            <span class="payment-conditions--text-cerise" (click)="openCreateBillingInfo()">
+              Adicionar dados de faturamento
+            </span>
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+
+
+    <section class="payment-conditions__actions">
+      <button es-button tabindex="12" size="sm" class="payment-conditions__next" color="secondary">
+        <es-loading [active]="loading.submit" [height]="'50px'">Avançar</es-loading>
+      </button>
+    </section>
+  </form>
+</div>
+
+<ng-template #noBillingInfo>
+  <div class="payment-conditions__no-billing-info">
+    <mat-icon>note_add</mat-icon>
+    <span>Adicione seus <b>dados de faturamento</b> para agilizar futuras cotações.</span>
+    <span class="payment-conditions__no-billing-info--cerise" (click)="openCreateBillingInfo()">
+      clique para adicionar dados de faturamento</span>
+  </div>
+</ng-template>
+
+
+<ng-template #multipleAgents>
+  <div class="payment-conditions__multiples-agents">
+    <span>Esta cotação possuí <b>vários agentes selecionados.</b> Por enquanto, as <b> orientações de faturamento
+        deverão
+        ser encaminhadas bilateralmente para a contraparte vencedora.</b></span>
+  </div>
+</ng-template>

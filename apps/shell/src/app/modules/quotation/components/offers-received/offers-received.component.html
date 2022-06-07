@@ -1,0 +1,268 @@
+<div class="offers-received" [@detailExpand]="detailExpand" [ngClass]="{
+    'detail--expand': detailExpand === 'expanded',
+    'detail--winner': hasOfferWinner
+  }">
+
+  <ng-container *ngIf="!isLoading || offers?.length else loadingTpl">
+    <ng-container *ngTemplateOutlet="detailsQuotation"></ng-container>
+    <ng-container *ngIf="offers?.length;else empty">
+      <div class="row details-quotation__container">
+        <div class="title col-10">
+          <span class="vertical-center">Ofertas Recebidas</span>
+        </div>
+      </div>
+
+      <table class="mt-2" matSort (matSortChange)="sortData($event)">
+        <thead>
+          <tr>
+            <ng-container *ngFor="let col of tableColumns">
+              <th *ngIf="col.headerCol !== 'Preço'" [ngClass]="{
+                  'column-action': col.isAction,
+                  'column-observation': col?.isObservation,
+                  'remove-right-child' : col?.isObservation
+                }">
+                {{col.headerCol}}
+                <span class="offers-received--sub-title">
+                  {{col.subHeader}}
+                </span>
+              </th>
+
+              <th *ngIf="col.headerCol == 'Preço'" mat-sort-header="Preço" [ngClass]="{
+                  'column-action' : col.isAction,
+                  'column-observation' : col?.isObservation,
+                  'remove-right-child' : col?.isObservation
+                }">
+                {{col.headerCol}}
+                <span class="offers-received--sub-title">
+                  {{col.subHeader}}
+                </span>
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr #expired *ngFor="let item of sortedData;trackBy: trackByFn"
+            [class.column-observation]="item?.observation">
+            <ecCountDown [checkDateTime]="item.proposalExpiration" (checkExpired)="expired.value = $event" hidden>
+            </ecCountDown>
+            <ng-container *ngFor="let col of tableColumns; let colIndex=index">
+              <td [ngClass]="{
+                'expired-offer': expired.value && item.status !== 'Vencedora',
+                'text-left': col?.isNameCompany,
+                'remove-right-child': col?.isObservation,
+                'owner-offer': item.status === 'Vencedora'
+              }">
+                <span *ngIf="col?.isObservation && item?.observation">
+                  <es-icon name="comment" [matTooltip]="item?.observation"></es-icon>
+                </span>
+
+                <a [ngClass]="{'offers-received__hyperlink': item?.registrationForm}" *ngIf="col?.isNameCompany"
+                  (click)="downloadOfferPDF(item)" [matTooltip]="ownerNames">
+                  {{item[col.displayCol]}}
+                  ({{item['fantasyName']}})
+                </a>
+
+                <span *ngIf="col?.isCreateAt">{{item[col.displayCol] | date:'dd/MM/yyyy HH:mm'}}</span>
+
+                <span *ngIf="col?.isCurrency">{{item[col.displayCol] | currency}}</span>
+
+                <span [class.diff-quotation]="item.energyVolumeAverage !== quotation.energyVolumeAverage"
+                  *ngIf="col?.isVolume">{{item[col.displayCol] | number : '1.3-3'}}</span>
+
+                <span *ngIf="col?.isPriceWithVolume && item[col.displayCol]">
+                  {{item[col.displayCol] | currency:'BRL':'' }}
+                </span>
+
+                <span
+                  [class.diff-quotation]="(item.formattedPaymentBusinessDay !== quotation.formattedPaymentBusinessDay)"
+                  *ngIf="col?.isDate">{{item[col.displayCol]}}</span>
+
+                <span *ngIf="col?.isDateWithHours"
+                  [class.diff-quotation]="(item.proposalExpiration | date:dateTemplate) !== (quotation.expiration | date:dateTemplate)">
+                  {{item[col.displayCol] | date:'dd/MM/yyyy - HH:mm'}}
+                </span>
+
+                <a *ngIf="col?.isCustomization && item[col.condicionalCol]" class="offers-received__hyperlink"
+                  (click)="openDetailCustomizationOffer(item)" matTooltip="Dados customização">
+                  {{col.displayCol}}
+                </a>
+
+                <span *ngIf="col?.isCustomization && !item[col.condicionalCol]">Sem alterações</span>
+
+                <span class="action-item" *ngIf="col?.isAction">
+                  <ng-container *ngIf="quotation.status !== 'ACTIVE'; else ativoTemplate">
+                    <ng-container [ngSwitch]="item.status">
+                      <div *ngSwitchCase="'WINNER'">
+                        <es-icon name="trophy" [ngClass]="{'offers-received--icon': true}"></es-icon>
+                      </div>
+
+                      <div *ngSwitchCase="'EXPIRED'">
+                        <ng-container *ngTemplateOutlet="disabledTemplate"></ng-container>
+                      </div>
+
+                      <div *ngSwitchCase="'CANCELED'">
+                        <ng-container *ngTemplateOutlet="disabledTemplate"></ng-container>
+                      </div>
+
+                      <div *ngSwitchCase="'REPLACED'">
+                        <ng-container *ngTemplateOutlet="disabledTemplate"></ng-container>
+                      </div>
+
+                      <div *ngSwitchDefault>
+                        <button es-button color="secondary" (click)="confirmProposal(item)">Clique para
+                          negociar</button>
+                      </div>
+
+                      <ng-template #disabledTemplate>
+                        <button es-button class="es-disabled" color="secondary" [disabled]="true">
+                          Fechado para negociar
+                        </button>
+                      </ng-template>
+                    </ng-container>
+                  </ng-container>
+
+                  <ng-template #ativoTemplate>
+                    <button es-button class="action-item action-item--active">
+                      Aguarde o timer finalizar
+                    </button>
+                  </ng-template>
+                </span>
+
+                <span
+                  *ngIf="!item[col.displayCol] && !col?.isAction && !col?.isObservation && !col?.isCreateAt && !col?.isCustomization">-</span>
+
+                <span *ngIf="col?.isStatus">{{offerStatusEnum[item[col.displayCol]]}}</span>
+
+                <span *ngIf="col?.noTemplate">{{item[col.displayCol]}}</span>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <ng-template #empty>
+      <div class="align-not-offer">
+        <es-icon name="slash"></es-icon>
+        Não existe nenhuma oferta
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <ec-loading [active]="true"></ec-loading>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #menuQuotation>
+  <div class="show-download text-right">
+    <div class="dropdown">
+      <mat-icon>more_vert</mat-icon>
+      <div class="dropdown-content">
+        <button class="dropdown__item" (click)="createQuotationWithQuotation()">
+          <mat-icon>content_copy</mat-icon>
+          <span>Clonar cotação</span>
+        </button>
+
+        <button class="dropdown__item" (click)="downloadXlsx()" *ngIf="offers?.length">
+          <mat-icon>cloud_download</mat-icon>
+          <span>Arquivo .xls</span>
+        </button>
+
+        <button class="dropdown__item dropdown__item--cancel" (click)="cancelQuotation()"
+          *ngIf="quotation?.status === 'ACTIVE'">
+          <mat-icon>cancel</mat-icon>
+          <span>Cancelar cotação</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #detailsQuotation>
+  <div class="row details-quotation">
+    <hr>
+    <div class="row details-quotation__container">
+      <div class="title col-10">
+        <span class="vertical-center">Detalhes cotação</span>
+      </div>
+      <div class="col-2 justify-content-end">
+        <ng-container *ngTemplateOutlet="menuQuotation"></ng-container>
+      </div>
+    </div>
+    <div class="row details-quotation__container">
+      <div class="col-2">
+        <div class="details-quotation__container">
+          <div>
+            <mat-label class="container__label">Sazonalização</mat-label>
+          </div>
+          <div class="mt-2">
+            {{getCustomizationDescriptionInput(quotation?.minimumSeasonality, quotation?.maximumSeasonality)}}
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="details-quotation__container">
+          <div>
+            <mat-label class="container__label">Flexibilidade</mat-label>
+          </div>
+          <div class="mt-2">
+            {{getCustomizationDescriptionInput(quotation?.minimumFlexibility, quotation?.maximumFlexibility)}}
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="details-quotation__container">
+          <div>
+            <mat-label class="container__label">Modulação</mat-label>
+          </div>
+          <div class="mt-2">
+            {{modulationType[quotation?.modulationType]}}
+          </div>
+          <div class="mt-2">
+            {{getCustomizationDescriptionInput(quotation?.minimalModulation, quotation?.maximumModulation)}}
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="details-quotation__container">
+          <div>
+            <mat-label class="container__label">Reajuste:</mat-label>
+          </div>
+          <div class="mt-2">
+            {{indexerEnum[quotation.indexer]}}
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="details-quotation__container">
+          <div>
+            <mat-label class="container__label">Pagamento:</mat-label>
+          </div>
+          <div class="mt-2">
+            {{quotation.formattedPaymentBusinessDay}}
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="details-quotation__container">
+          <div>
+            <mat-label class="container__label">Garantia aceitas:</mat-label>
+          </div>
+          <div class="mt-2">
+            {{financialGuarantee}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+</ng-template>

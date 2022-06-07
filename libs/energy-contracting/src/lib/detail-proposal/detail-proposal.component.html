@@ -1,0 +1,28 @@
+<div class="detail-proposal">
+    <div>
+        <div class="detail-proposal__image-container">
+            <es-icon name="flash" size="lg"></es-icon><span>{{energySourceEnum[offerQuotation?.energySource]}}</span>
+        </div>
+        <div class="image-container">
+            <es-icon name="place-holder" size="lg"></es-icon><span>{{subMarketRegionEnum[offerQuotation?.subMarketRegion]}}</span>
+        </div>
+        <div class="image-container">
+            <es-icon size="lg" name="calendar"></es-icon>
+
+            <ng-container
+                *ngIf="(offerQuotation?.startDate | date:'MMMyy' ) !== (offerQuotation?.endDate | date:'MMMyy'); else iqualsDate">
+                <span class="initial">
+                    {{offerQuotation?.startDate | date:'MMMyy' | esReplace:'[ .]':'/'}}
+                    <span class="partial">a</span>
+                    {{offerQuotation?.endDate | date:'MMMyy' | esReplace:'[ .]':'/'}}
+                </span>
+            </ng-container>
+        </div>
+
+        <ng-content></ng-content>
+    </div>
+</div>
+
+<ng-template #iqualsDate>
+    <span class="initial">{{offerQuotation?.startDate | date:'MMMyyy' | esReplace:'[ .]':'/'}}</span>
+</ng-template>

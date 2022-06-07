@@ -1,0 +1,91 @@
+@import "../../../../../../energy-contracting/assets/styles/mixins.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+
+.my-account {
+  font-weight: $poppins-semibold;
+  font-size: $font-xs;
+  background-color: #fff;
+  color: #000000;
+  top: 40px;
+  right: 0;
+  width: 320px;
+  box-shadow: -5px 8px 20px 1px rgba(0, 0, 0, 0.52) !important;
+  padding: 0;
+  z-index: 1000;
+  min-width: 100px;
+  position: fixed;
+
+  &__content {
+    padding: 25px;
+
+    .content {
+      &__section {
+        border-bottom: 1px solid #2d2d2f;
+
+        &--profile {
+          display: flex;
+          font-size: $font-sm;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &--menu {
+          div {
+            display: flex;
+            width: fit-content;
+            align-items: center;
+            margin: 12px 0;
+            cursor: pointer;
+
+            mat-icon {
+              width: 24px;
+            }
+
+            a {
+              display: block;
+              position: relative;
+              text-decoration: none;
+              color: $base-text;
+              font-size: 14px;
+            }
+
+            &:hover {
+              text-shadow: 0 0 1px #000000;
+              color: $rose-pearl !important;
+            }
+          }
+        }
+      }
+
+      &__sign-out {
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 5px;
+        padding: 12px 0 0;
+
+        button {
+          background-color: $cloudy;
+          width: 75px;
+          height: 33px;
+          border: 0;
+          display: flex;
+          align-items: center;
+          transition: background-color 350ms;
+
+          es-icon {
+            margin-right: 10px;
+            margin-left: 5px;
+          }
+
+          &:hover {
+            background-color: rgba(181, 173, 166, 0.60)
+          }
+        }
+      }
+    }
+  }
+}

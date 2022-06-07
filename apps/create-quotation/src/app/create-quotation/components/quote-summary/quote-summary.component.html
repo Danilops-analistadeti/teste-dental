@@ -1,0 +1,253 @@
+<div class="summary">
+  <div class="summary__container">
+    <div class="summary__title pt-2">
+      <mat-label>Data de abertura</mat-label>
+      <span>{{dateNow | date:'dd/MM/yyyy  '}}</span>
+    </div>
+
+    <ng-container *ngIf="quotation?.energy; else loadingTemplate">
+      <section class="base">
+        <h1 class="summary__title">Base</h1>
+
+        <div class="base__container">
+          <div class="summary__grid">
+            <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.energy?.ownerId}">
+              <mat-label>Empresa</mat-label>
+              <ng-container *ngIf="quotation.energy?.ownerId; else emptyItemTemplate">
+                <span *ngFor="let item of quotation.energy.ownerId">{{item.name}}</span>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="summary__grid">
+            <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.energy?.quotationType}">
+              <mat-label>Tipo de operação</mat-label>
+              <ng-container *ngIf="quotation.energy?.quotationType; else emptyItemTemplate">
+                <span>{{ quotation.energy?.quotationType }}</span>
+              </ng-container>
+            </div>
+
+            <div class="grid__item">
+              <mat-label>Tipo de oferta</mat-label>
+              <span>{{ quotation.energy.priceType === 'PLD' ? 'Spread' : 'Preço Fixo' }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary__energy">
+        <h1 class="summary__title">Energia</h1>
+
+        <div class="summary__grid">
+          <div class="grid__item">
+            <mat-label>Início do fornecimento</mat-label>
+            <span class="d-flex">
+              <es-icon name="calendar"></es-icon>
+              {{ quotation.energy.startDate }}
+            </span>
+          </div>
+
+          <div class="grid__item">
+            <mat-label>Término do fornecimento</mat-label>
+            <span class="d-flex">
+              <es-icon name="calendar"></es-icon>
+              {{ quotation.energy.endDate }}
+            </span>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.energy?.energyVolumeAverage}">
+            <mat-label>Volume médio</mat-label>
+            <ng-container *ngIf="quotation?.energy?.energyVolumeAverage; else emptyItemTemplate">
+              <span class="d-flex">
+                <es-icon name="flash"></es-icon>
+                {{ quotation.energy.energyVolumeAverage }} MWm
+              </span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.energy?.energyVolumeHour}">
+            <mat-label>Volume total</mat-label>
+            <ng-container *ngIf="quotation.energy?.energyVolumeHour; else emptyItemTemplate">
+              <span class="d-flex">
+                <es-icon name="flash"></es-icon>
+                {{ quotation.energy.energyVolumeHour }} MWh
+              </span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.energy?.energySource}">
+            <mat-label>Fonte energética</mat-label>
+            <ng-container *ngIf="quotation.energy?.energySource; else emptyItemTemplate">
+              <span>{{ quotation.energy?.energySource }}</span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.energy?.subMarketRegion}">
+            <mat-label>Submercado</mat-label>
+            <ng-container *ngIf="quotation.energy?.subMarketRegion; else emptyItemTemplate">
+              <span>{{ quotation.energy?.subMarketRegion }}</span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" *ngIf="quotation.energy?.retusd || quotation.energy?.fullReparation">
+            <mat-label>Retusd</mat-label>
+            <span
+              *ngIf="quotation.energy.retusd && !quotation.energy?.fullReparation">{{quotation.energy.retusd | currency:'BRL':''}}</span>
+            <span *ngIf="quotation.energy?.fullReparation">Quero ressarcimento integral</span>
+          </div>
+        </div>
+      </section>
+      <section class="summary__energy" *ngIf="quotation.customization">
+        <h1 class="summary__title">Customização</h1>
+
+        <div class="energy__container">
+          <div class="summary__header mt-3">
+            <mat-label>Sazonalização</mat-label>
+          </div>
+          <div class="summary__header mt-2">
+            {{getCustomizationDescriptionInput(quotation.customization?.minimumSeasonality, quotation.customization?.maximumSeasonality)}}
+          </div>
+          <div class="summary__header mt-3">
+            <mat-label>Flexibilidade</mat-label>
+          </div>
+          <div class="summary__header mt-2">
+            {{getCustomizationDescriptionInput(quotation.customization?.minimumFlexibility, quotation.customization?.maximumFlexibility)}}
+          </div>
+          <div class="summary__header mt-3">
+            <mat-label>Modulação</mat-label>
+          </div>
+          <div class="summary__header mt-2">
+            {{modulationType[quotation?.customization?.modulationType]}}
+          </div>
+          <div class="summary__header mt-2">
+            {{getCustomizationDescriptionInput(quotation.customization?.minimalModulation, quotation.customization?.maximumModulation)}}
+          </div>
+          <div class="summary__header mt-3">
+            <mat-label>Garantia financeira</mat-label>
+          </div>
+          <div class="summary__header mt-2">
+            <span>{{financialGuarantee}}</span>
+          </div>
+        </div>
+
+        <hr />
+      </section>
+
+      <section class="summary__energy summary__energy--end">
+        <h1 class="summary__title">Definições de envio</h1>
+
+        <div class="summary__grid">
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.shippingSettings?.proposalSubmission}">
+            <mat-label>Receber ofertas até</mat-label>
+            <ng-container *ngIf="quotation.shippingSettings?.proposalSubmission; else emptyItemTemplate">
+              <span class="d-flex">
+                <es-icon name="calendar"></es-icon>
+                {{quotation.shippingSettings.proposalSubmission | date:'dd/MM/yyyy HH:mm'}}
+              </span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.shippingSettings?.expiration}">
+            <mat-label>Definir vencedor até</mat-label>
+            <ng-container *ngIf="quotation.shippingSettings?.expiration;else emptyItemTemplate">
+              <span class="d-flex">
+                <es-icon name="calendar"></es-icon>
+                {{quotation.shippingSettings.expiration | date:'dd/MM/yyyy HH:mm'}}
+              </span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.shippingSettings?.companyGroups}">
+            <mat-label>Enviar cotação para</mat-label>
+            <ng-container *ngIf="quotation?.shippingSettings?.companyGroups;else emptyItemTemplate">
+              <ng-container *ngFor="let companyGroup of quotation?.shippingSettings?.companyGroups">
+                <span>{{companyGroup.name}}</span>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="summary__grid">
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.paymentConditions?.indexer}">
+            <mat-label>Índice de reajuste</mat-label>
+            <ng-container *ngIf="quotation?.paymentConditions?.indexer;else emptyItemTemplate">
+              <span>{{quotation.paymentConditions.indexer}}</span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item"
+            [ngClass]="{'grid__item--unfilled': !quotation.paymentConditions?.paymentBusinessDay}">
+            <mat-label>Dia do pagamento</mat-label>
+            <ng-container *ngIf="quotation?.paymentConditions?.paymentBusinessDay;else emptyItemTemplate">
+              <span>{{quotation.paymentConditions.paymentBusinessDay}} -
+                {{ quotation.paymentConditions.paymentDayType === 'WORKING_DAY' ? 'Útil' : 'Corrido' }}</span>
+            </ng-container>
+          </div>
+
+          <div class="grid__item" [ngClass]="{'grid__item--unfilled': !quotation.paymentConditions?.billingInfo?.name}">
+            <mat-label>Dados de faturamento</mat-label>
+            <ng-container *ngIf="quotation?.paymentConditions?.billingInfo?.name;else emptyItemTemplate">
+              <span>{{quotation.paymentConditions.billingInfo.name}}</span>
+            </ng-container>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </div>
+
+  <section class="summary__observation">
+    <div class="observation__title">
+      <mat-label>Observações</mat-label>
+      <button es-button esUploadButton [formControl]="filesControl" [sizeLimit]="2"
+        (ngModelChange)="onFileControlChange($event)" typesAccepted=".pdf,.doc,.docx" color="secondary">
+        <span>anexar arquivo</span>
+      </button>
+    </div>
+    <mat-form-field appearance="outline">
+      <textarea matInput [rows]="3" [(ngModel)]="observation"></textarea>
+    </mat-form-field>
+
+    <mat-list class="summary__attachment" *ngIf="filesControl.value?.length">
+      <div mat-subheader>Anexos</div>
+      <mat-list-item class="attachment__container" *ngFor="let file of filesControl.value;let i = index">
+        <div class="attachment__item">
+          <mat-icon mat-list-icon>text_snippet</mat-icon>
+          <div class="attachment__data">
+            <span>{{file.name}}</span>
+            <span class="attachment__size">({{ transformSize(file.size) }})</span>
+          </div>
+        </div>
+        <ng-container *ngIf="filesUploaded.get(file.name);else attachmentUploadingTemplate">
+          <button mat-icon-button (click)="removeFile(i)" matTooltip="Remover anexo">
+            <mat-icon>close</mat-icon>
+          </button>
+        </ng-container>
+
+        <ng-template #attachmentUploadingTemplate>
+          <span class="attachment__loading">
+            Processando <mat-spinner [diameter]="20"></mat-spinner>
+          </span>
+        </ng-template>
+      </mat-list-item>
+    </mat-list>
+
+    <div class="summary__actions mt-3 mb-3">
+      <button mat-button routerLink="/quotation">CANCELAR</button>
+      <button es-button size="md" (click)="createQuotation()" [ngClass]="{'disabled': isLoading}">
+        <ec-loading [active]="isLoading" height="25px">
+          <span>LANÇAR COTAÇÃO</span>
+        </ec-loading>
+      </button>
+    </div>
+  </section>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="summary__loading">
+    <es-loading [active]="true"></es-loading>
+  </div>
+</ng-template>
+
+<ng-template #emptyItemTemplate>
+  <span>Não preenchido</span>
+</ng-template>

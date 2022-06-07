@@ -1,0 +1,95 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/var.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/colors.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font';
+
+.create-quotation {
+  padding: 25px;
+
+  mat-radio-group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .mat-form-field-prefix {
+    top: 0 !important;
+    span {
+      font-size: 16px;
+      color: #9b9b9b;
+      margin-right: 10px;
+    }
+  }
+
+  &--error {
+    position: absolute;
+    bottom: 0;
+    margin-left: 10px;
+    font-size: 75%;
+  }
+
+  &__subheading {
+    h1 {
+      display: flex;
+      align-items: center;
+      font-size: mat-font-size($config, subheading-2);
+      font-weight: $bold;
+      color: $cerise;
+
+      &::after {
+        margin-right: 0.25em;
+        margin-left: 2.5em;
+      }
+
+      &::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #c0c0c0;
+      }
+    }
+  }
+
+  &__offer {
+    display: flex;
+    flex-direction: column;
+
+    &--small {
+      font-size: mat-font-size($config, caption);
+    }
+
+    mat-radio-group {
+      mat-radio-button {
+        .mat-radio-label-content {
+          padding-left: 20px;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__next {
+    width: 204px;
+  }
+
+  &__info {
+    &--item {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+    }
+
+    &--position {
+      position: absolute;
+      top: 57%;
+      left: 49%;
+      bottom: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

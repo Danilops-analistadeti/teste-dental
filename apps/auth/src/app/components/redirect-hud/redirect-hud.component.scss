@@ -1,0 +1,45 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+@import "../../../../../../libs/energy-contracting/assets/styles/colors";
+@import "../../../../../../libs/energy-contracting/assets/styles/mixins.scss";
+
+.login {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-image: $backgroundColor;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+    &__container {
+        width: 650px;
+
+        .container {
+            &__row {
+                display: flex;
+                padding-top: 10px;
+
+                span {
+                    font-size: 40px;
+                    position: relative;
+                    top: 44px;
+                    padding-left: 22px;
+                }
+            }
+        }
+    }
+}
+
+.esfera-notifications-container {
+    top: 0px !important;
+}
+
+img.logo-bg {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+}

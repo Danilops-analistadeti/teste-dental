@@ -1,0 +1,107 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/var.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font";
+@import "~@esferaenergia/esfera-ui/assets/styles/colors";
+
+.quote-summary {
+  ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    color: #000000;
+    font-weight: $bold;
+    opacity: inherit;
+  }
+
+  height: 100%;
+
+  &__grey {
+    font-weight: $bold;
+    font-size: mat-font-size($config, body-1);
+    line-height: 16px;
+    color: #8a8787;
+  }
+
+  .header {
+    padding: 10px;
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+
+      .container {
+        &__title {
+          .title {
+            &__info {
+              font-weight: $bold;
+              font-size: mat-font-size($config, body-1);
+              line-height: 16px;
+              color: #8a8787;
+            }
+
+            &__value {
+              display: flex;
+              justify-content: space-between;
+
+              .value {
+                &__title {
+                  font-style: normal;
+                  font-weight: $bold;
+                  font-size: mat-font-size($config, title);
+                  line-height: 34px;
+                }
+
+                &__all-agents {
+                  font-size: mat-font-size($config, body-1);
+                  line-height: 34px;
+                  font-weight: $bold;
+                  padding-bottom: 10px;
+                  color: $cerise;
+                  text-align: center;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+
+        &__cnpj {
+          margin: 0 0 16px;
+
+          .cnpj {
+            &__info {
+              font-size: 18px;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #4ac9a8;
+
+    &__container {
+      margin: 8px;
+    }
+
+    &__source-type {
+      font-weight: bold;
+      font-size: mat-font-size($config, subheading-2);
+      line-height: 24px;
+      text-transform: uppercase;
+    }
+
+    &__key {
+      font-style: normal;
+      font-weight: $medium;
+      font-size: mat-font-size($config, body-1);
+      line-height: 16px;
+    }
+
+    span {
+      text-transform: uppercase;
+      color: $base-primary;
+    }
+  }
+}

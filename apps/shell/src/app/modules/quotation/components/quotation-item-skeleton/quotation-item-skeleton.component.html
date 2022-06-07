@@ -1,0 +1,46 @@
+<ng-container *ngIf="loading">
+   <div [id]="'skeleton-item-' + item" *ngFor="let item of [1,2,3,4,5]" class="box mb-3">
+      <div class="box__item--expand">
+         <es-skeleton class="small__skeleton" width="10" height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <span class="box__item--timer">
+            <div class="box__item--timer--date">
+               <es-skeleton height="25"></es-skeleton>
+            </div>
+         </span>
+      </div>
+      <div class=" box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <span>
+            <es-skeleton height="25"></es-skeleton>
+         </span>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+      <div class="box__item">
+         <es-skeleton height="25"></es-skeleton>
+      </div>
+   </div>
+</ng-container>

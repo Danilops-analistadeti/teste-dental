@@ -1,0 +1,12 @@
+<div class="confirm">
+  <h2 *ngIf="data?.title" mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content>
+    <span>{{data.content}}</span>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="confirm__action confirm__action--accept" tabindex="1" size="sm" es-button type="submit" mat-dialog-close="true">
+      Sim
+    </button>
+    <button class="confirm__action confirm__action--decline" mat-dialog-close size="sm" es-button type="submit">Não</button>
+  </mat-dialog-actions>
+</div>

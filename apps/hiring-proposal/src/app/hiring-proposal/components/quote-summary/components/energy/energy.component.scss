@@ -1,0 +1,48 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/colors';
+
+.energy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+  height: 100%;
+
+  span {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: bold;
+    color: #8a8787;
+  }
+
+  &__subtitle {
+    font-style: normal;
+    font-weight: normal;
+    color: #152536;
+  }
+
+  &__item {
+    padding-top: 1rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+    mat-icon {
+      color: $cerise;
+      margin-right: 5px;
+      font-size: 15px;
+      height: 15px;
+      width: 15px;
+    }
+
+    es-icon {
+      color: $cerise;
+      margin-right: 5px;
+    }
+  }
+}

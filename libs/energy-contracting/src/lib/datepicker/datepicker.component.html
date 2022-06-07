@@ -1,0 +1,36 @@
+<mat-form-field class="ec-datepicker w-100" [appearance]="appearance" [ngStyle]="ngStyleFormField">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="hidden"
+    [matDatepicker]="datePicker"
+    [min]="min"
+    [max]="max"
+    [matDatepickerFilter]="matDatepickerFilter"
+    [ngModel]="value"
+    (dateChange)="dateChange($event.target.value)"
+  >
+  <input
+    matInput
+    mask="00/00/0000"
+    (click)="onTouched()"
+    (change)="setValue($event.target.value)"
+    [readonly]="readonly || loading"
+    [value]="value | date:'dd/MM/yyyy'"
+    [formControl]="ngControl?.control"
+  >
+  <mat-datepicker [hidden]="hiddenDatePicker" #datePicker [disabled]="readonly || loading"></mat-datepicker>
+  <mat-datepicker-toggle [hidden]="hiddenDatePicker" matPrefix [for]="datePicker">
+    <es-icon matDatepickerToggleIcon matPrefix name="calendar" size="md"></es-icon>
+  </mat-datepicker-toggle>
+
+  <ec-loading *ngIf="loading;" matSuffix>
+    <div class="d-flex">
+      <img src="assets/gif/logo_hud_all_small.gif" alt='logo esfera' className='logo'
+        [ngStyle]="{'height': '35px' }" />
+    </div>
+  </ec-loading>
+
+  <mat-hint>
+    <ng-content></ng-content>
+  </mat-hint>
+</mat-form-field>

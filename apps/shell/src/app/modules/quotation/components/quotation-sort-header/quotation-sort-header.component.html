@@ -1,0 +1,16 @@
+<div class="sort-header" [class.mat-sort-header-sorted]="isSorted()" (mouseenter)="setIndicatorHintVisible(true)"
+    (mouseleave)="setIndicatorHintVisible(false)"  (click)="handleClick()">
+    <div class=" sort-header-content">
+    <ng-content></ng-content>
+</div>
+<div class="sort-header-arrow">
+<es-icon name="arrow-upward"
+        [@arrowPosition]="getArrowViewState()"
+        [@indicator]="getArrowDirectionState()"
+        [@arrowOpacity]="getArrowViewState()"
+        [@allowChildren]="getArrowDirectionState()"
+        (@arrowPosition.start)="disableViewStateAnimation = true"
+        (@arrowPosition.done)="disableViewStateAnimation = false">
+    </es-icon>
+</div>
+</div>

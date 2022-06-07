@@ -1,0 +1,31 @@
+<div class="my-account">
+  <div class="my-account__content">
+    <div class="content__section content__section--profile">
+      <div class="account-profile--user">
+        <span>{{user?.name}}</span>
+      </div>
+      <div class="account-profile--user mb-3" *ngFor="let company of user?.roles; trackBy: trackByFn">
+        {{company?.company?.fantasyName}}
+      </div>
+    </div>
+
+    <div class="content__section content__section--menu">
+      <ng-container *ngFor="let item of list;trackBy: trackByFn; let i = index">
+        <div *ngIf="item.active" (click)="item.onClick()">
+          <mat-icon *ngIf="!isCustomIcon(item.icon);else customIcon">{{ item.icon }}</mat-icon>
+          <ng-template #customIcon>
+            <mat-icon [svgIcon]="item.icon"></mat-icon>
+          </ng-template>
+          <a href="javascript:void(0)" class="btn-my-info">{{item.title}}</a>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="content__sign-out">
+      <button (click)="logout()">
+        <es-icon name="arrow-out"></es-icon>
+        Sair
+      </button>
+    </div>
+  </div>
+</div>

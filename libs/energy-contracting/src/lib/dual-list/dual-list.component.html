@@ -1,0 +1,40 @@
+<ng-template #loadingTpl>
+  <div class="container d-flex justify-content-center">
+    <div class="loading">
+      <ec-loading [active]="false" height="70px">
+      </ec-loading>
+    </div>
+  </div>
+</ng-template>
+
+<form [formGroup]="form">
+  <div class="bootstrap-duallistbox-container row">
+    <div class="box1 col-md-6">
+
+      <mat-form-field appearance="outline" class="mat-prefix">
+        <mat-label>{{labelListOne}}</mat-label>
+        <input matInput formControlName="inputOne" autocomplete="off">
+      </mat-form-field>
+
+      <button class="mt-2 mb-2" es-button type="button" (click)="moveAllSelected()"> adicionar todos</button>
+      <ng-container *ngIf="!isLoading else loadingTpl">
+        <select multiple="multiple">
+          <option *ngFor="let selectOne of filteredOptions; let i = index" (click)="selectOneList(selectOne, $event)">
+            {{selectOne.name}}</option>
+        </select>
+      </ng-container>
+    </div>
+    <div class="box2 col-md-6">
+      <mat-form-field appearance="outline" class="mat-prefix">
+        <mat-label>{{labelListTwo}}</mat-label>
+        <input matInput formControlName="inputTwo" autocomplete="off">
+      </mat-form-field>
+      <button class="mt-2 mb-2" type="button" es-button (click)="moveAllUnselected()">remover todos</button>
+      <select multiple="multiple">
+        <option *ngFor="let selectTwo of filteredOptionsTwo; let i = index" (click)="selectTwoList(selectTwo, $event)">
+          {{selectTwo.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+</form>

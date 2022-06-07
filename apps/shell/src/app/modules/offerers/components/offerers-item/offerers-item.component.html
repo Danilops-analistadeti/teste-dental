@@ -1,0 +1,30 @@
+<es-card-item [columns]="offerer" [headerColumns]="columns" [disabledExpanded]="true"
+  [ngStyleGridColumn]="'repeat(auto-fit,minmax(25%, 4fr))'">
+  <es-card-column columnName="name">
+    <ng-template let-columns>
+      <span class="d-flex justify-content-start">
+        {{ columns }}
+      </span>
+    </ng-template>
+  </es-card-column>
+
+  <es-card-column columnName="cnpj">
+    <ng-template let-columns>
+      <span class="d-flex justify-content-end">
+        {{ columns | mask: '00.000.000/0000-00' }}
+      </span>
+    </ng-template>
+  </es-card-column>
+
+  <es-card-column columnName="actions">
+    <ng-template let-row="row">
+      <div class="d-flex justify-content-end">
+        <ec-loading [active]="getLoadingPDF" height="50px">
+          <es-icon name="cloud-download" size="md" (click)="downloadPDF(row)"
+            [ngClass]="{'disabled-icon': !row?.registrationForm}">
+          </es-icon>
+        </ec-loading>
+      </div>
+    </ng-template>
+  </es-card-column>
+</es-card-item>

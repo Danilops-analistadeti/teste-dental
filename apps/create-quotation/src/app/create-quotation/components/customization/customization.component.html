@@ -1,0 +1,190 @@
+<ng-template #loadingTpl>
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <es-loading [active]="true"></es-loading>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="customization">
+  <form [formGroup]="customizationForm" (ngSubmit)="nextForm()" (keyup.enter)="nextForm()">
+    <div class="row mt-1">
+      <div class="col-6">
+        <h1 class="customization__title">Sazonalização</h1>
+        <section class="pt-3">
+          <div class="row mt-1">
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="customization__field mat-suffix">
+                <mat-label>Mínima</mat-label>
+                <input required matInput min="0" max="100" step="5" formControlName="minimumSeasonality" id="minimumSeasonality" type="number"
+                  autocomplete="off" tabindex="1">
+                <span matSuffix>%</span>
+                <mat-error *ngIf="customizationForm.get('minimumSeasonality').hasError('required')">
+                  Mínima é obrigatório
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimumSeasonality').hasError('min')">
+                  Valor deve ser maior ou igual a {{customizationForm.get('minimumSeasonality').errors.min.min}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimumSeasonality').hasError('max')">
+                  Valor deve ser menor ou igual a {{customizationForm.get('minimumSeasonality').errors.max.max}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimumSeasonality').hasError('stepsValidator')">
+                  {{customizationForm.get('minimumSeasonality').errors.error}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="customization__field mat-suffix">
+                <mat-label>Máxima</mat-label>
+                <input required matInput min="0" max="100" step="5" formControlName="maximumSeasonality" id="maximumSeasonality" type="number"
+                  autocomplete="off" tabindex="2">
+                <span matSuffix>%</span>
+                <mat-error *ngIf="customizationForm.get('maximumSeasonality').hasError('required')">
+                  Máxima é obrigatório
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumSeasonality').hasError('min')">
+                  Valor deve ser maior ou igual a {{customizationForm.get('maximumSeasonality').errors.min.min}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumSeasonality').hasError('max')">
+                  Valor deve ser menor ou igual a {{customizationForm.get('maximumSeasonality').errors.max.max}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumSeasonality').hasError('stepsValidator')">
+                  {{customizationForm.get('maximumSeasonality').errors.error}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-6">
+        <h1 class="customization__title">Flexibilidade</h1>
+        <section class="pt-3">
+          <div class="row mt-1">
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="customization__field mat-suffix">
+                <mat-label>Mínima</mat-label>
+                <input required matInput min="0" max="100" step="5" formControlName="minimumFlexibility" id="minimumFlexibility" type="number"
+                  autocomplete="off" tabindex="3">
+                <span matSuffix>%</span>
+                <mat-error *ngIf="customizationForm.get('minimumFlexibility').hasError('required')">
+                  Mínima é obrigatório
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimumFlexibility').hasError('min')">
+                  Valor deve ser maior ou igual a {{customizationForm.get('minimumFlexibility').errors.min.min}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimumFlexibility').hasError('max')">
+                  Valor deve ser menor ou igual a {{customizationForm.get('minimumFlexibility').errors.max.max}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimumFlexibility').hasError('stepsValidator')">
+                  {{customizationForm.get('minimumFlexibility').errors.error}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="customization__field mat-suffix">
+                <mat-label>Máxima</mat-label>
+                <input required matInput min="0" max="100" step="5" formControlName="maximumFlexibility" id="maximumFlexibility" type="number"
+                  autocomplete="off" tabindex="4">
+                <span matSuffix>%</span>
+                <mat-error *ngIf="customizationForm.get('maximumFlexibility').hasError('required')">
+                  Máxima é obrigatório
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumFlexibility').hasError('min')">
+                  Valor deve ser maior ou igual a {{customizationForm.get('maximumFlexibility').errors.min.min}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumFlexibility').hasError('max')">
+                  Valor deve ser menor ou igual a {{customizationForm.get('maximumFlexibility').errors.max.max}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumFlexibility').hasError('stepsValidator')">
+                  {{customizationForm.get('maximumFlexibility').errors.error}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div>
+        <h1 class="customization__title">Modulação</h1>
+        <section class="pt-3">
+          <div class="row mb-5">
+            <div class="col-12 d-flex">
+              <mat-radio-group class="customization__radio-group" formControlName="modulationType" (change)="changeModulationType($event)">
+                <mat-radio-button class="customization__radio-group__radio-button" tabindex="5" value="NONE">Nenhuma</mat-radio-button>
+                <mat-radio-button class="customization__radio-group__radio-button" tabindex="6" value="LOAD">Conforme carga</mat-radio-button>
+                <mat-radio-button class="customization__radio-group__radio-button" tabindex="7" value="GENERATION">Conforme geração</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="customization__field mat-suffix">
+                <mat-label>Mínima</mat-label>
+                <input required matInput min="0" max="100" step="5" formControlName="minimalModulation" id="minimalModulation" type="number"
+                  autocomplete="off" tabindex="8">
+                <span matSuffix>%</span>
+                <mat-error *ngIf="customizationForm.get('minimalModulation').hasError('required')">
+                  Mínima é obrigatório
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimalModulation').hasError('min')">
+                  Valor deve ser maior ou igual a {{customizationForm.get('minimalModulation').errors.min.min}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimalModulation').hasError('max')">
+                  Valor deve ser menor ou igual a {{customizationForm.get('minimalModulation').errors.max.max}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('minimalModulation').hasError('stepsValidator')">
+                  {{customizationForm.get('minimalModulation').errors.error}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="customization__field mat-suffix">
+                <mat-label>Máxima</mat-label>
+                <input required matInput min="0" max="100" step="5" formControlName="maximumModulation" id="maximumModulation" type="number"
+                  autocomplete="off" tabindex="9">
+                <span matSuffix>%</span>
+                <mat-error *ngIf="customizationForm.get('maximumModulation').hasError('required')">
+                  Máxima é obrigatório
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumModulation').hasError('min')">
+                  Valor deve ser maior ou igual a {{customizationForm.get('maximumModulation').errors.min.min}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumModulation').hasError('max')">
+                  Valor deve ser menor ou igual a {{customizationForm.get('maximumModulation').errors.max.max}}
+                </mat-error>
+                <mat-error *ngIf="customizationForm.get('maximumModulation').hasError('stepsValidator')">
+                  {{customizationForm.get('maximumModulation').errors.error}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <h1 class="customization__title">Garantia Financeira</h1>
+    <section class="pt-3">
+      <div class="row" *ngIf="financialsGuarantee">
+        <div class="col-3 mt-3" *ngFor="let order of financialsGuaranteeFormArray.controls; let i = index">
+          <label formArrayName="financialGuarantee">
+            <mat-checkbox tabindex="9" #checkBox [formControlName]="i">
+              {{financialsGuarantee[i].name}}
+            </mat-checkbox>
+          </label>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <mat-error *ngIf="customizationForm.get('financialGuarantee').hasError('invalidSize')">
+          {{customizationForm.get('financialGuarantee').errors.error}}
+        </mat-error>
+      </div>
+    </section>
+    <section class="customization__actions mt-3">
+      <button es-button tabindex="10" size="sm" class="customization__next" color="secondary">
+        Avançar
+      </button>
+    </section>
+  </form>
+</div>

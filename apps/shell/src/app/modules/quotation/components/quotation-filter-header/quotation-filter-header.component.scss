@@ -1,0 +1,81 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+
+::ng-deep {
+    .mat-select-panel {
+        position: relative;
+        top: 35px;
+        left: 35px;
+    }
+}
+
+ec-month-picker {
+    align-self: center;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 1440px) {
+    .filter-header {
+        flex-wrap: wrap;
+    }
+}
+
+.filter-header {
+    max-width: 100%;
+    padding: 15px 20px 15px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 204px);
+    justify-content: space-evenly;
+
+    .filter {
+        align-self: center;
+        justify-self: center;
+
+        input {
+            font-size: $primary-fs;
+            font-weight: $poppins-medium;
+            color: $base-text;
+            width: 90%;
+        }
+
+        input[type="number"].no-selectors {
+            -moz-appearance: textfield;
+            min-width: 70px;
+        }
+        input[type="number"].no-selectors::-webkit-inner-spin-button,
+        input[type="number"].no-selectors::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    .clean {
+        position: absolute;
+        font-size: $primary-fs;
+        left: -28px;
+        top: -13px;
+        color: $base-text;
+        cursor: pointer;
+        font-weight: $black;
+    }
+
+    .clean--input {
+        position: absolute;
+        font-size: $primary-fs;
+        left: -10px;
+        top: -13px;
+        color: $base-text;
+        cursor: pointer;
+        font-weight: $black;
+    }
+
+    .reset-filter {
+        display: flex;
+        padding-left: 14px;
+
+        span {
+            cursor: pointer;
+            font-weight: $poppins-medium;
+            color: $base-text;
+        }
+    }
+}

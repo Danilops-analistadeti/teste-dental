@@ -1,0 +1,31 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font";
+@import "~@esferaenergia/esfera-ui/assets/styles/colors";
+
+.card {
+  padding: 28px 15px;
+  background: linear-gradient(131.97deg, #e56977 15.06%, #f4ba94 100%);
+  outline: none;
+  border: none;
+
+  &__title {
+    span {
+      font-size: 30px;
+      line-height: 45px;
+      color: $base-primary;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+
+    span {
+      width: 100%;
+      font-size: $font-md;
+      line-height: 36px;
+      color: $base-primary;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/var.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font';
+@import '~@esferaenergia/esfera-ui/assets/styles/colors';
+
+.popup-checkout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  h1 {
+    font-size: 18px;
+    font-weight: $bold;
+    line-height: 27px;
+  }
+
+  mat-icon {
+    color: $cerise;
+    font-size: 60px;
+  }
+
+  &__subtitle {
+    font-weight: normal;
+    font-size: mat-font-size($config, title);
+    line-height: 24px;
+  }
+
+  &__cerise {
+    font-style: normal;
+    font-weight: $bold;
+    font-size: mat-font-size($config, caption);
+    line-height: 18px;
+    color: $cerise;
+  }
+}

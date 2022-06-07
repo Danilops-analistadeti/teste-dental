@@ -1,0 +1,58 @@
+.quote-unavailable {
+    position: relative;
+    background: url(/assets/images/backgroud-unavailable.png) center no-repeat padding-box;
+    background-size: cover;
+    background-color: #f5f8fa;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &__logo {
+        position: fixed;
+        top: 50px;
+    }
+
+    &__card {
+        display: flex !important;
+        align-items: center;
+        width: 798px;
+        height: 292px;
+
+        &__title {
+            font-weight: bold;
+            font-size: 32px;
+            letter-spacing: 0px;
+            color: #3a3a3a;
+            opacity: 1;
+            margin-left: 20px;
+        }
+
+        &__subtitle {
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 0px;
+            color: #3a3a3a;
+            opacity: 1;
+            margin-left: 20px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .quote-unavailable {
+        &__card {
+            width: 100%;
+            height: auto;
+        }
+
+        &--logo {
+            height: 100px;
+        }
+
+        img {
+            height: auto;
+        }
+    }
+}

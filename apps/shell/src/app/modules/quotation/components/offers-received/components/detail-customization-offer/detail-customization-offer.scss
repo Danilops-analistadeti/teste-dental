@@ -1,0 +1,29 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/colors.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/var.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font";
+
+.detail-customization-offer {
+    &__title {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__header {
+        display: flex;
+        margin-top: 3%;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: mat-font-size($config, body-1);
+        font-weight: $bold;
+    }
+}
+
+.mat-dialog-title {
+    font-weight: $poppins-black;
+    font-size: 32px;
+    font-family: Poppins;
+    text-align: center;
+    letter-spacing: 0px;
+    color: $cerise;
+    opacity: 1;
+}

@@ -1,0 +1,43 @@
+@import "../../../../../assets/scss/break-points.scss";
+
+.timer {
+  display: flex;
+  align-items: center;
+  font-weight: normal;
+  font-size: 12px;
+  letter-spacing: 0px;
+  color: #424242;
+  opacity: 1;
+
+  .icon-timer {
+    margin-right: 5px;
+    height: 12px;
+  }
+}
+
+.content {
+  @media only screen and (max-height: 620px) {
+    height: 72vh;
+  }
+
+  @media only screen and (min-height: 621px) {
+    height: 80vh;
+  }
+
+  &__header {
+    padding: 0 1rem;
+  }
+
+  &__body {
+    padding: 0 0.5rem 0 1rem;
+    overflow: visible;
+  }
+}
+
+.filters-opened {
+  height: 78vh !important;
+}
+
+.quotation-container {
+  margin-right: -1rem;
+}

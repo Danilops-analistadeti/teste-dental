@@ -1,0 +1,89 @@
+<mat-card class="customization">
+  <div class="customization__grid">
+    <div class="customization__item">
+      <span class="customization__title">Indexador de reajuste</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{indexerEnum[quotation?.indexer]}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item">
+      <span class="customization__title">Sazonalização</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{getCustomizationDescriptionInput(quotation?.minimumSeasonality,
+          quotation?.maximumSeasonality)}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item">
+      <span class="customization__title">Flexibilidade</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{getCustomizationDescriptionInput(quotation?.minimumFlexibility,
+          quotation?.maximumFlexibility)}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item">
+      <span class="customization__title">Modulação</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{getCustomizationDescriptionInput(quotation?.minimalModulation,
+          quotation?.maximumModulation)}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item">
+      <span class="customization__title">Tipo Modulação</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{modulationType}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item"></div>
+
+    <div class="customization__item customization__item--full-width">
+      <span class="customization__title">Garantias aceitas</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{financialGuarantee}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item customization__item--full-width">
+      <span class="customization__title">Observações</span>
+      <div class="customization__container">
+        <span class="customization__subtitle">{{quotation.observation || 'Nenhuma observação'}}</span>
+      </div>
+    </div>
+
+    <div class="customization__item customization__item--full-width">
+      <span class="customization__title customization__title--files">
+        Arquivos em anexo
+
+        <button *ngIf="quotation.files.length > 0" es-button tabindex="12" size="sm" class="customization__container--btn-cerise"
+          (click)="downloadAllFiles()">
+          Download anexos
+        </button>
+      </span>
+
+      <ng-container *ngIf="quotation.files.length > 0; then showFiles; else notFiles;"></ng-container>
+
+      <ng-template #showFiles>
+        <ng-container *ngFor="let file of files;let i = index;trackBy: trackByFiles">
+          <button *ngIf="i <= (showAllFiles ? files.length - 1 : 1)"
+            class="mat-button mat-button-base customization__container--btn-files" (click)="downloadFile(file)">
+            {{file.name}}
+          </button>
+
+          <button *ngIf="i === 2 && !showAllFiles"
+            class="mat-button mat-button-base customization__container--btn-files"
+            (click)="showAllFiles = !showAllFiles">
+            +{{files.length - 2}}
+          </button>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #notFiles>
+        <span class="customization__subtitle">O usuário não inseriu nenhum arquivo</span>
+      </ng-template>
+    </div>
+  </div>
+</mat-card>

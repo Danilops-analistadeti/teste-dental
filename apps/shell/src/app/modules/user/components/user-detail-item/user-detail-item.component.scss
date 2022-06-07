@@ -1,0 +1,54 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+
+.user-detail-item {
+  table {
+    width: 100%;
+
+    tr,
+    th,
+    td {
+      border: none;
+    }
+
+    th {
+      font-weight: $bold;
+      font-size: $font-xs;
+      line-height: 18px;
+    }
+
+    td {
+      font-size: $primary-fs;
+      line-height: 24px;
+      font-weight: 500;
+      button {
+        outline: none;
+      }
+    }
+
+    .mat-column-phone {
+      width: 15%;
+    }
+    .mat-column-cpf {
+      width: 15%;
+    }
+
+    .mat-column-actionDetail,
+    .mat-column-actionEdit {
+      font-weight: $bold;
+      font-size: $font-xs;
+      line-height: 18px;
+      color: #8a8787;
+      cursor: pointer;
+      width: 25px;
+    }
+
+    .mat-column-actionDelete {
+      font-weight: $bold;
+      font-size: $font-xs;
+      line-height: 18px;
+      color: #e10b0b;
+      cursor: pointer;
+      width: 25px;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+<mat-card class="energy">
+  <div class="energy__item">
+    <span class="energy__title"> Volume médio</span>
+    <div class="energy__container">
+      <es-icon name="flash"></es-icon>
+      <span class="energy__subtitle">{{(quotation?.energyVolumeAverage | convertDecimal:'6':true ).convertedDecimal}}
+        MWm</span>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Volume total</span>
+    <div class="energy__container">
+      <es-icon name="flash"></es-icon>
+      <span class="energy__subtitle">{{(quotation?.energyVolumeHour | convertDecimal:'3':true).convertedDecimal  }}
+        MWh</span>
+    </div>
+  </div>
+  <div class="energy__item">
+    <span class="energy__title">Início do fornec.</span>
+    <div class="energy__container">
+      <mat-icon>calendar_today</mat-icon>
+      <span class="energy__subtitle">{{quotation?.startDate | date:'dd/MM/yyyy'}}</span>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Término do fornec.</span>
+    <div class="energy__container">
+      <mat-icon>calendar_today</mat-icon>
+      <span class="energy__subtitle">{{quotation?.endDate | date:'dd/MM/yyyy'}}</span>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Tipo de energia</span>
+    <div class="energy__container">
+      <mat-icon>format_list_bulleted</mat-icon>
+      <span class="energy__subtitle">{{energySource[quotation?.energySource]}}</span>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Submercado</span>
+    <div class="energy__container">
+      <mat-icon>location_on</mat-icon>
+      <span class="energy__subtitle">{{subMarketRegion[quotation?.subMarketRegion]}}</span>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Retusd</span>
+    <div class="energy__container">
+      <ng-container *ngIf="quotation?.retusd; else emptyItemTemplate">
+        <span class="energy__subtitle">{{quotation.retusd | currency:'BRL'}} MWh</span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Valid. Oferta</span>
+    <div class="energy__container">
+      <mat-icon>calendar_today</mat-icon>
+      <span class="energy__subtitle">{{quotation?.expiration | date:'dd/MM/yyyy HH:mm'}}</span>
+    </div>
+  </div>
+
+  <div class="energy__item">
+    <span class="energy__title">Dia de pagamento</span>
+    <div class="energy__container">
+      <span class="energy__subtitle">{{quotation?.formattedPaymentBusinessDay}}</span>
+    </div>
+  </div>
+</mat-card>
+
+<ng-template #emptyItemTemplate>
+  <span>Não preenchido</span>
+</ng-template>

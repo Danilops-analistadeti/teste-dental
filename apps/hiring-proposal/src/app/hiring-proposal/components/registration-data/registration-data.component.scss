@@ -1,0 +1,78 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/var.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font';
+@import '~@esferaenergia/esfera-ui/assets/styles/colors';
+
+.registration-data {
+  mat-form-field {
+    width: 100%;
+  }
+
+  &__container {
+    height: 250px;
+    overflow: auto;
+  }
+
+  &__title {
+    font-weight: $bold;
+    font-size: mat-font-size($config, body-1);
+    line-height: 24px;
+  }
+
+  &__cerise {
+    color: $cerise;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: $bold;
+  }
+
+  &__text-end {
+    text-align: end;
+  }
+
+  &__multiples-agents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__no-billing-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    mat-icon {
+      font-size: 30px;
+      color: $cerise;
+      margin-bottom: 20px;
+    }
+
+    &--cerise {
+      color: $cerise;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: $bold;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__btn-cerise {
+      width: 204px;
+      border: 1px solid $cerise !important;
+      color: $cerise !important;
+      background-color: #ffffff !important;
+      margin-left: 60px;
+
+      &:hover {
+        color: #ffffff !important;
+        background: $cerise !important;
+      }
+    }
+  }
+}

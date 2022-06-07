@@ -1,0 +1,33 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/colors";
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font";
+
+.general-data {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+
+    label {
+      color: $base-text-light;
+      font-weight: bold;
+      font-size: $font-xs;
+      margin: 0;
+    }
+
+    span {
+      font-weight: bold;
+      font-size: $font-lg;
+      margin-bottom: 6px;
+    }
+
+    &--uppercase {
+      span {
+        text-transform: uppercase;
+      }
+    }
+  }
+}

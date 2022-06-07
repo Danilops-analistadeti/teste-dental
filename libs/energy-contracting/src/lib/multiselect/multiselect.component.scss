@@ -1,0 +1,57 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+
+::ng-deep {
+  .ng-select-disabled .ng-select-container:after {
+    background-image: none !important;
+  }
+
+  .ng-select {
+    .ng-select-container {
+      height: 59.5px;
+      padding: 0.75em 0.75em 0 0.75em;
+      display: flex;
+      align-items: center;
+
+      .ng-value {
+        background: $base-secondary !important;
+        color: $base-text !important;
+      }
+
+      .ng-value-icon {
+        color: $base-text !important;
+        padding: 5px;
+      }
+
+      .ng-placeholder {
+        display: flex;
+        align-self: center;
+        background-color: inherit !important;
+
+      }
+
+      .ng-input {
+        padding-left: 15px;
+      }
+
+      .ng-spinner-loader {
+        top: 2px;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .multi-invalid {
+    .ng-select {
+      .ng-select-container {
+        .ng-placeholder {
+          color: #f44336;
+        }
+      }
+
+      .ng-appearance-outline:after {
+        border-color: #f44336;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "energy-contracting",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/cdk": "^12.x",
+    "@angular/common": "~12.x",
+    "@angular/core": "~12.x",
+    "@angular/material": "^12.x",
+    "@esferaenergia/esfera-ui": "0.19.1"
+  },
+  "dependencies": {
+    "tslib": "^2.1.0"
+  }
+}

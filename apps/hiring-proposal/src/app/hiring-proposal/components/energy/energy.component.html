@@ -1,0 +1,136 @@
+<div class="energy">
+
+  <form [formGroup]="energyForm">
+    <div class="energy__container">
+      <section class="energy__offer-type">
+        <div class="row">
+          <div class="col-3 col-sm-3 d-flex flex-column">
+            <label class="energy__title">Tipo de oferta</label>
+            <mat-radio-group class="mt-2" formControlName="offerType">
+              <mat-radio-button value="FIRM" tabindex="1">Firme</mat-radio-button>
+              <mat-radio-button class="pl-3" value="INDICATIVE" tabindex="2" [disabled]="isDisableIndicative">Indicativa
+              </mat-radio-button>
+              <mat-error class="energy__container__error"
+                *ngIf="energyForm.get('offerType').hasError('required') && energyForm.get('offerType')?.touched">
+                Tipo de oferta é obrigatório
+              </mat-error>
+            </mat-radio-group>
+          </div>
+        </div>
+      </section>
+
+      <section class="energy__volume">
+        <span class="energy__title energy__title-bold">Volume de energia</span>
+        <div class="row mt-3">
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="mat-suffix" floatLabel="always">
+              <mat-label>Volume médio</mat-label>
+              <input matInput formControlName="energyVolumeAverage" (change)="changeMwAverage()" tabindex="3">
+              <span class="d-flex" matPrefix>MW<span class="med-suffix">méd</span></span>
+              <mat-error *ngIf="energyForm.get('energyVolumeAverage').hasError('required')">
+                Volume de energia é obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-icon class="energy__volume__position">compare_arrows</mat-icon>
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="mat-suffix" floatLabel="always">
+              <mat-label>Volume total</mat-label>
+              <input matInput formControlName="energyVolumeHour" (change)="changeMwh()" tabindex="4">
+              <span class="d-flex" matPrefix>MWh</span>
+              <mat-error *ngIf="energyForm.get('energyVolumeHour').hasError('required')">
+                Volume de energia é obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </section>
+
+      <section class="energy__price">
+        <span class="energy__title-bold">{{validValueOffer.labelOfferValue}} de
+          {{validValueOffer.labelOfferQuotationType}}</span>
+        <div class="row mt-3">
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="mat-suffix mat-prefix" floatLabel="always">
+              <mat-label>{{validValueOffer?.labelOfferValue}}</mat-label>
+              <input esCurrencyMask matInput formControlName="price" tabindex="5"
+                [options]="validValueOffer?.currencyOptionsOfferValue" placeholder="Defina seu preço" autocomplete="off"
+                [matTooltip]="validValueOffer?.tooltip">
+              <span matPrefix>R$/MWh</span>
+
+              <mat-error *ngIf="energyForm.get('price').hasError('required')">
+                {{validValueOffer?.labelOfferValue}} é obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field appearance="outline" class="mat-suffix mat-prefix" floatLabel="always">
+              <mat-label>Retusd</mat-label>
+              <input esCurrencyMask matInput formControlName="retusd" tabindex="6"
+                matTooltip="Para valor negativo, digite o número referente ao Retusd e em seguida o sinal negativo"
+                autocomplete="off"
+                [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'center', max: 999.99, min: -999.99}">
+              <span matPrefix class="mat-suffix">R$/MWh</span>
+            </mat-form-field>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <span class="energy__title-bold">Pagamento e validade da oferta</span>
+
+        <div class="row mt-3">
+          <div class="col-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Dia do pagamento</mat-label>
+              <mat-select formControlName="paymentBusinessDay" required id="paymentBusinessDay" tabindex="7"
+                placeholder="Selecione o dia">
+                <mat-option *ngFor="let business of businessDay" [value]="business">
+                  {{business}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="energyForm.get('paymentBusinessDay').hasError('required')">
+                Dia de pagamento é obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-4 energy__check-align">
+            <mat-radio-group formControlName="paymentDayType">
+              <mat-radio-button value="WORKING_DAY" tabindex="8">Dia útil</mat-radio-button>
+              <mat-radio-button class="pl-2" value="CONSECUTIVE_DAY" tabindex="9">Dia Corrido</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field appearance="outline" floatLabel="always" class="mat-prefix">
+              <mat-label>Validade da oferta</mat-label>
+              <input matInput formControlName="auxProposalExpiration" tabindex="10" required>
+              <input matInput class="d-none" [ngxMatDatetimePicker]="validProposal" formControlName="proposalExpiration"
+                required autocomplete="off">
+              <mat-datepicker-toggle matPrefix [for]="validProposal">
+                <es-icon matDatepickerToggleIcon matPrefix name="calendar" size="md"></es-icon>
+              </mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #validProposal>
+              </ngx-mat-datetime-picker>
+
+              <mat-error *ngIf="energyForm.get('proposalExpiration').hasError('required')">
+                Validade da obrigatório
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </section>
+
+      <section class="energy__actions">
+        <button (click)="rejectOffer()" mat-button tabindex="11" type="button">
+          <ec-loading height="2.5rem" [active]="isProcessingRejectRequest">Não quero participar</ec-loading>
+        </button>
+
+        <button es-button tabindex="12" size="sm" class="energy__actions__btn-cerise" (click)="nextStep()">
+          Avançar >
+        </button>
+      </section>
+    </div>
+  </form>
+</div>

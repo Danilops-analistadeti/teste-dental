@@ -1,0 +1,16 @@
+<div class="general-data">
+  <div class="general-data__item">
+    <label>Razão social:</label>
+    <span>{{ data?.name }}</span>
+  </div>
+
+  <div class="general-data__item">
+    <label>CNPJ:</label>
+    <span>{{ data?.cnpj | mask: '00.000.000/0000-00' }}</span>
+  </div>
+
+  <div class="general-data__item general-data__item--uppercase">
+    <label>Atividade:</label>
+    <span *ngFor="let feature of data?.features;trackBy: trackByFn">{{ feature?.name }}</span>
+  </div>
+</div>

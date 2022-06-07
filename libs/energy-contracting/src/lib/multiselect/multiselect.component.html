@@ -1,0 +1,99 @@
+<div class="select-multi" [ngClass]="{'multi-invalid ': ngControl?.control?.invalid && ngControl?.control?.touched}">
+  <ng-select #ngSelect
+             class="ng-select"
+             [ngClass]="{'ng-invalid ng-touched ': ngControl?.control.invalid}"
+             [appendTo]="appendTo"
+             [items]="items"
+             [multiple]="multiple"
+             [bindLabel]="bindLabel"
+             [groupBy]="groupBy"
+             [selectOnTab]="true"
+             [selectableGroup]="selectableGroup"
+             [selectableGroupAsModel]="false"
+             [closeOnSelect]="closeOnSelect"
+             [bindValue]="bindValue"
+             [placeholder]="placeholder"
+             [formControl]="ngControl?.control"
+             [loading]="loading"
+             [notFoundText]="ngSelect.searchTerm ? notFoundText : 'Pesquisar ' + placeholder + '...'"
+             (ngModelChange)="writeValue(ngControl?.control?.value)"
+             (click)="onTouched()"
+             (focus)="onFocus($event)"
+             appearance="outline"
+             (search)="onSearch($event)"
+             (clear)="onSearch($event)"
+             (close)="onSearch($event)"
+             [disabled]="disabled"
+             [tabindex]="tabindex"
+  >
+    <ng-template ng-multi-label-tmp let-selectedItems="items" let-clear="clear">
+      <div *ngIf="(selectedItems?.length < items?.length) || (!selectedAllLabel)" class="d-flex">
+        <div class="ng-value ng-value-name" *ngFor="let item of selectedItems | slice:0:1">
+          <ng-container
+            [ngTemplateOutlet]="valueTemplate || defaultValueTemplate"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          ></ng-container>
+          <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+        </div>
+        <div class="ng-value" *ngIf="selectedItems?.length > 1">
+          <span class="ng-value-label">e mais {{ selectedItems.length - 1 }}</span>
+        </div>
+      </div>
+      <div *ngIf="(selectedItems?.length === items?.length) && (selectedAllLabel)">
+        {{ selectedAllLabel }}
+      </div>
+    </ng-template>
+
+    <ng-template *ngIf="multiple && showAllSelect" ng-header-tmp>
+      <div class="select-multi__select-all" (click)="selectAll()">
+        <mat-checkbox (click)="onItemClick($event)" [ngModel]="itemsSelectedQuantity === quantity.ALL"
+                      [indeterminate]="itemsSelectedQuantity === quantity.SOME">
+          {{ selectAllLabel }}
+        </mat-checkbox>
+      </div>
+    </ng-template>
+
+    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+      <mat-checkbox *ngIf="selectableGroup" [ngModel]="item$.selected" (click)="onItemClick($event)">
+        <ng-container
+          [ngTemplateOutlet]="optionGroupTemplate || defaultGroupOption"
+          [ngTemplateOutletContext]="{ $implicit: item }"
+        ></ng-container>
+      </mat-checkbox>
+      <div *ngIf="!selectableGroup">
+        <ng-container
+          [ngTemplateOutlet]="optionGroupTemplate || defaultGroupOption"
+          [ngTemplateOutletContext]="{ $implicit: item }"
+        ></ng-container>
+      </div>
+    </ng-template>
+
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+      <div class="d-flex align-items-center" [ngClass]="{'select-multi__sub-item': groupBy}">
+        <mat-icon *ngIf="groupBy" class="select-multi__arrow">subdirectory_arrow_right</mat-icon>
+        <mat-checkbox [ngModel]="item$.selected" (click)="onItemClick($event)">
+          <ng-container
+            [ngTemplateOutlet]="optionTemplate || defaultOption"
+            [ngTemplateOutletContext]="{ $implicit: item }"
+          ></ng-container>
+        </mat-checkbox>
+      </div>
+    </ng-template>
+
+    <ng-template ng-footer-tmp *ngIf="footerTemplate">
+      <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+    </ng-template>
+  </ng-select>
+</div>
+
+<ng-template #defaultValueTemplate let-item>
+  <span class="ng-value-label"> {{ item[bindLabel] }}</span>
+</ng-template>
+
+<ng-template #defaultOption let-item>
+  {{ item[bindLabel] }}
+</ng-template>
+
+<ng-template #defaultGroupOption let-item>
+  {{ item[groupBy] }}
+</ng-template>

@@ -1,0 +1,6 @@
+.quotation-base {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 70% 30%;
+  overflow-y: auto;
+}

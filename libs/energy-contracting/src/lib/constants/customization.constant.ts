@@ -1,0 +1,8 @@
+export const CUSTOMIZATION = {
+    DEFAULT_VALUE_CUSTOMIZATION: 0,
+    DEFAULT_VALUE_MODULATION_TYPE: 'NONE',
+    DEFAULT_VALUE_FINANCIAL_GUARANTEE: [],
+    ERROR_SIZE_STEPS: 'Apenas números inteiros múltiplos de 5',
+    REGISTRATION_AFTER_PAYMENT:  'REGISTRATION_AFTER_PAYMENT',
+    ERROR_SIZE_FINANCIAL_GUARANTEE: `É necessário selecionar ao menos 1 (uma) 'Garantia Financeira'`,
+};

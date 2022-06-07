@@ -1,0 +1,209 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/_colors.scss';
+
+.month-picker {
+  &-appearance {
+    &-outline {
+      width: 100%;
+    }
+
+    &-fill {
+      height: 41px;
+      position: relative;
+      top: -9px;
+      border-bottom: 1px solid $pine-cone;
+      outline: none;
+      width: 180px;
+    }
+  }
+
+  .clean {
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    cursor: pointer;
+    color: $base-text;
+    font-weight: $black;
+  }
+
+  label {
+    min-width: 100%;
+    font-weight: $poppins-light;
+  }
+
+  .title-empty {
+    color: $base-text-light;
+    margin: 0;
+    padding-bottom: 2px;
+    cursor: pointer;
+    width: 100%;
+
+    position: relative;
+    top: 11px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: $font-sm;
+  }
+
+  .title-value {
+    color: $base-text-light;
+    font-size: 11px;
+    position: relative;
+    bottom: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .label-value {
+    position: relative;
+    top: 18px;
+    right: 45px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .ajust-position-outline {
+    transform: translateY(-22px) !important;
+  }
+
+  .calendars {
+    box-shadow: 1px 1px 14px;
+    border-radius: 10px;
+    width: 450px;
+    height: 358px;
+    z-index: 9999;
+    background-color: #f3f3f3;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 230px 240px;
+    grid-template-rows: 300px 50px;
+    transform: translateY(10px);
+    padding: 2px;
+
+    .calendar {
+      margin-bottom: 10px;
+      padding: 0;
+      width: 216px;
+    }
+
+    .header {
+      height: 58px;
+      align-items: center;
+      justify-content: space-evenly;
+      display: flex;
+      color: #636363;
+
+      .dowels {
+        font-size: 26px;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .dowels:hover {
+        background-color: #e97a96;
+        border-radius: 50px;
+      }
+
+      .dowels::selection {
+        background: none;
+      }
+
+      .year {
+        font-size: $primary-fs !important;
+        padding: 5px;
+      }
+
+      .year::selection {
+        background: none;
+      }
+
+      .year-select {
+        background-color: #f15d8359;
+        border-radius: 10px;
+      }
+    }
+
+    .body {
+      background-color: $white-smoke;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      height: 81%;
+
+      .month {
+        height: 100%;
+
+        button {
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 0;
+          font-weight: $bold;
+          color: $pine-cone;
+          border-radius: 8px;
+        }
+
+        button:hover {
+          background-color: $base-secondary;
+        }
+
+        button:disabled {
+          color: #e2d2d2;
+          background-color: #c6baba;
+          cursor: auto;
+        }
+
+        .range {
+          background-color: #f8b3c5;
+          color: $bg-light;
+        }
+      }
+
+      .select {
+        background-color: #f15d83 !important;
+        color: $bg-light !important;
+      }
+    }
+
+    .footer {
+      text-align: -webkit-center;
+      align-self: center;
+
+      button {
+        line-height: 0 !important;
+        max-width: 150px;
+        height: 30px;
+      }
+
+      .btn-clean {
+        background: #ffffff;
+        color: $cerise;
+        letter-spacing: 0.5px;
+        outline: none;
+      }
+    }
+  }
+}
+
+.input--label {
+  color: rgba(0, 0, 0, 0.87) !important;
+  font-weight: 400 !important;
+  cursor: pointer;
+}
+
+.clear-wrapper {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.disabled-button {
+  background-color: #f8b3c5;
+}

@@ -1,0 +1,18 @@
+<div class="users">
+  <es-list-template [loading]="!subscription?.closed" [errorMessage]="errorMessage">
+
+    <es-title>Usuários</es-title>
+
+    <es-subtitle>
+      Visualize e edite seu cadastro de usuário. Administradores podem criar e editar os usuários que terão acesso a
+      plataforma.
+    </es-subtitle>
+
+    <button es-button (click)="openCreateUserModal()" *ngxPermissionsOnly="['USER']">
+      Novo usuário
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <ec-user-item [user]="user" *ngFor="let user of users"></ec-user-item>
+  </es-list-template>
+</div>

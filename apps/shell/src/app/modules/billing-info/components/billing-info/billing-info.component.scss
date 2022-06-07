@@ -1,0 +1,32 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+
+.billing-info {
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    &--bold {
+      font-size: 24px;
+      font-weight: $bold;
+      font-style: normal;
+      line-height: 36px;
+    }
+
+    &--regular {
+      font-weight: $regular;
+      font-size: $font-sm;
+      line-height: 21px;
+    }
+  }
+
+  &__search {
+    ::ng-deep {
+      mat-form-field {
+        .mat-form-field-wrapper {
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+      }
+    }
+  }
+}

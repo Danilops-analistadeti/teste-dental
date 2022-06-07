@@ -1,0 +1,31 @@
+.quotation-base {
+  display: grid;
+  grid-template:
+    "ec-stepper ec-quote-summary"
+    "ec-footer-general ec-footer-general";
+  overflow-y: auto;
+
+  ec-stepper {
+    grid-area: ec-stepper;
+  }
+
+  ec-quote-summary {
+    grid-area: ec-quote-summary;
+  }
+
+  ec-footer-general {
+    grid-area: ec-footer-general;
+  }
+}
+
+::ng-deep {
+  .stepper {
+    .mat-card {
+      max-height: 781px !important;
+    }
+  }
+
+  .summary {
+    max-height: 841px !important;
+  }
+}

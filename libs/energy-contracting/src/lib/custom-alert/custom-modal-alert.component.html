@@ -1,0 +1,24 @@
+<div class="custom-alert">
+  <div class="custom-alert__title mb-3">
+    <div class="custom-alert__title__icon">
+      <mat-icon>{{data?.icon}}</mat-icon>
+      <span>{{data.title}}</span>
+    </div>
+
+    <mat-icon class="close" mat-dialog-close>close</mat-icon>
+  </div>
+
+  <span [innerHTML]="data.htmlBody">
+  </span>
+
+  <mat-checkbox (change)="notAppearAgain()">
+    não mostrar essa mensagem novamente
+  </mat-checkbox>
+
+  <div class="d-flex justify-content-center mt-3">
+    <button es-button color="secondary" [mat-dialog-close]="true" cdkFocusInitial>
+      fechar
+    </button>
+  </div>
+
+</div>

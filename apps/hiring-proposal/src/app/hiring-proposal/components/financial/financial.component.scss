@@ -1,0 +1,45 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/colors.scss";
+
+.financial {
+  padding: 25px;
+  overflow: hidden;
+
+  &__field {
+    width: 100%;
+  }
+
+  &__readjustment {
+    color: #8a8787;
+  }
+
+  &__icon-cerise {
+    color: $cerise;
+  }
+
+  &__next {
+    width: 204px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    &__btn-cerise {
+      width: 204px;
+      border: 1px solid $cerise !important;
+      color: $cerise !important;
+      background-color: #ffffff !important;
+      margin-left: 60px;
+
+      &:hover {
+        color: #ffffff !important;
+        background: $cerise !important;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-checkbox-layout {
+    white-space: normal !important;
+  }
+}

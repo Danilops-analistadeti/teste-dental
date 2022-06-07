@@ -1,0 +1,14 @@
+<mat-form-field appearance="outline" class="mat-prefix" [appearance]="appearance" [ngStyle]="ngStyleFormField">
+  <mat-label>{{label}}</mat-label>
+  <input matInput [matDatepicker]="startDate" [formControl]="ngControl?.control" (click)="onTouched()" [value]="value"
+    [disabled]="disabled" [min]="min" [max]="max">
+  <mat-datepicker-toggle matPrefix [for]="startDate" [disabled]="disabled">
+    <es-icon matDatepickerToggleIcon matPrefix name="calendar" size="md"></es-icon>
+  </mat-datepicker-toggle>
+  <mat-datepicker #startDate startView="multi-year" [disabled]="disabled" (selectedChanged)="writeValue($event.value)"
+    panelClass="example-month-picker">
+  </mat-datepicker>
+  <mat-error>
+    <ng-content></ng-content>
+  </mat-error>
+</mat-form-field>

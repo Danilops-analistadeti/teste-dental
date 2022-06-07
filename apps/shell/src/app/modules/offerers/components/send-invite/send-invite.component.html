@@ -1,0 +1,29 @@
+<div class="invite">
+  <div class="invite__header">
+    <h1 class="header__title">Enviar convite</h1>
+    <mat-icon (click)="close()">close</mat-icon>
+  </div>
+
+  <span class="invite__subtitle">
+    O e-mail informado abaixo receberá um convite com um link para realização do cadastro no hud Cotação. Após o cadastro
+    ser aprovado, a nova empresa estará habilitada para participar de suas cotações.
+  </span>
+
+  <div class="invite__form">
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input type="email" matInput [formControl]="emailControl"/>
+    </mat-form-field>
+  </div>
+
+  <div class="invite__actions">
+    <button es-button size="md" color="secondary" (click)="close()">cancelar</button>
+    <button es-button size="md" (click)="send()"
+            [ngClass]="{ 'disabled': emailControl.getError('required') || emailControl.getError('email') }"
+            [disabled]="emailControl.getError('required') || emailControl.getError('email')">
+      enviar convite
+    </button>
+  </div>
+</div>
+
+

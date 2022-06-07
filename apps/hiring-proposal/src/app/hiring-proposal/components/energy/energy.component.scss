@@ -1,0 +1,105 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/colors.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font';
+
+.energy {
+  ::ng-deep {
+    .mat-form-field-appearance-outline .mat-form-field-flex {
+      min-height: 54.81px !important;
+    }
+
+    .mat-prefix .mat-icon-button {
+      outline: none !important;
+
+      ::after {
+        outline: none !important;
+      }
+
+      ::before {
+        outline: none !important;
+      }
+    }
+  }
+
+  overflow: hidden;
+
+  &__container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  &__title-bold {
+    font-weight: $bold;
+    font-size: $primary-fs;
+    line-height: 24px;
+  }
+
+  &__offer-type {
+    padding-top: 1.5rem;
+    ::ng-deep {
+      mat-radio-group {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &__volume {
+    padding-top: 1.5rem;
+    &__position {
+      position: absolute;
+      color: $cerise;
+      top: 32%;
+      left: 49%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &__check-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    ::ng-deep {
+      mat-radio-group {
+        mat-radio-button {
+          padding-right: 20px;
+        }
+      }
+    }
+
+  }
+
+  &__price {
+    padding-top: 1rem;
+  }
+
+  &__payment-business {
+    padding-top: 2.7rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+
+    button {
+      text-transform: inherit !important;
+    }
+
+    &__btn-cerise {
+      width: 204px;
+      border: 1px solid $cerise !important;
+      color: $cerise !important;
+      background-color: #ffffff !important;
+      margin-left: 60px;
+
+      &:hover {
+        color: #ffffff !important;
+        background: $cerise !important;
+      }
+    }
+  }
+}

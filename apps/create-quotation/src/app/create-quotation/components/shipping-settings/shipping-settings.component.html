@@ -1,0 +1,112 @@
+<ng-template #loadingTpl>
+  <div class="container h-100 d-flex align-items-center justify-content-center">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <es-loading [active]="true"></es-loading>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<div class="shipping-settings">
+  <form [formGroup]="shippingSettingsForm">
+    <div class="row mt-4">
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="mat-prefix">
+          <mat-label>Receber ofertas até</mat-label>
+          <input matInput formControlName="auxProposalSubmission" required autocomplete="off"
+            id="auxProposalSubmission">
+          <input matInput class="d-none" [ngxMatDatetimePicker]="proposalSubmission"
+            formControlName="proposalSubmission" required [min]="minDate" autocomplete="off" id="proposalSubmission">
+          <mat-datepicker-toggle matPrefix [for]="proposalSubmission">
+            <es-icon matDatepickerToggleIcon matPrefix name="calendar" size="md"></es-icon>
+          </mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #proposalSubmission [showSeconds]="false">
+          </ngx-mat-datetime-picker>
+          <mat-error *ngIf="shippingSettingsForm.get('proposalSubmission').hasError('required')">
+            Receber ofertas até é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="mat-prefix">
+          <mat-label>Definir oferta vencedora até</mat-label>
+          <input matInput formControlName="auxExpiration" required
+            [hidden]="!shippingSettingsForm.get('proposalSubmission').value" autocomplete="off" id="auxExpiration">
+          <input matInput class="d-none" [ngxMatDatetimePicker]="expiration" [min]="minDate"
+            formControlName="expiration" required [disabled]="!shippingSettingsForm.get('proposalSubmission').value"
+            autocomplete="off">
+          <mat-datepicker-toggle matPrefix [for]="expiration">
+            <es-icon matDatepickerToggleIcon matPrefix name="calendar" size="md"></es-icon>
+          </mat-datepicker-toggle>
+          <ngx-mat-datetime-picker [showSeconds]="false" #expiration>
+          </ngx-mat-datetime-picker>
+          <mat-error *ngIf="shippingSettingsForm.get('auxExpiration').hasError('required')">
+            Definir oferta vencedora até é obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <section class="shipping-settings__groups mt-2">
+      <h1>Definições de ofertantes e grupos</h1>
+
+      <ng-container *ngIf="!loading.getCompanyGroups; else loadingTpl">
+        <div class="shipping-settings__card" *ngIf="companyGroups?.length; else noCompanyGroups">
+          <es-card-item [columns]="company" *ngFor="let company of companyGroups" [headerColumns]="companyColumns"
+            [multiSelect]="true" key="name" (selectedItems)="selectGroups($event)" [showSelect]="true"
+            [disabledExpanded]="true" [selected]="shippingSettingsForm.get('companyGroups').value"
+            [ngStyleGridColumn]="'40px repeat(auto-fit,minmax(90px, 3fr))'">
+
+            <es-card-column columnName="name">
+              <ng-template let-columns>
+                <div class="d-flex justify-content-start ml-3">
+                  <span class="item--bold">{{columns}}</span>
+                </div>
+              </ng-template>
+            </es-card-column>
+
+            <es-card-column columnName="countCompanies">
+              <ng-template let-columns>
+                <div class="d-flex justify-content-center">
+                  <span class="item--bold" *ngIf="columns">
+                    {{columns}} {{columns > 1 ? 'empresas' : 'empresa'}}</span>
+                </div>
+              </ng-template>
+            </es-card-column>
+
+            <es-card-column columnName="actions">
+              <ng-template let-row="row">
+                <div class="actions">
+                  <div class="actions__item" (click)="getCompanyOrAgents(row)">
+                    <ec-loading [active]="loading.isLoadingCompanyDetail" height="30px">
+                      <mat-icon class="actions__item--light-brown actions__item__detail" matTooltip="Detalhes">
+                        menu_book
+                      </mat-icon>
+                    </ec-loading>
+                  </div>
+                </div>
+              </ng-template>
+            </es-card-column>
+          </es-card-item>
+        </div>
+
+        <div class="shipping-settings--text-end pt-2">
+          <span class="shipping-settings--text-cerise" (click)="openCreateCompanyGroup()">Criar novo grupo de
+            ofertantes</span>
+        </div>
+      </ng-container>
+    </section>
+  </form>
+</div>
+
+<ng-template #noCompanyGroups>
+  <div class="shipping-settings__no-groups">
+    <mat-icon>group_add</mat-icon>
+    <span>Voce pode criar <b>grupos de ofertantes</b> para limitar o envio de cotações apenas para <b>aqueles que
+        desejar.</b></span>
+
+    <span class="shipping-settings__no-groups--cerise" (click)="openCreateCompanyGroup()">clique para criar um
+      grupo</span>
+  </div>
+</ng-template>

@@ -1,0 +1,31 @@
+<header>
+    <nav class="nav">
+        <div class="brand">
+            <div class="brand__logo-hud">
+                <a [routerLink]="['/']">
+                    <img [title]="version" src="/assets/images/logo-hud-energia.svg" />
+                </a>
+            </div>
+            <div id="word-mark"></div>
+        </div>
+        <div class="section">
+            <div class="nav__item timer">
+                <span>
+                    {{ dateNow | date: "dd MMM yyyy HH:mm:ss"}}
+                </span>
+            </div>
+            <div class="nav__item notification" *ngIf="false">
+                <es-icon name="bell"></es-icon>
+            </div>
+            <div class="nav__item account">
+                <a href="javascript:void(0)" data-wa="pit;topo-fixo;menu-gerencial" (click)="toggleMenu()"
+                    ecClickOutSide (clickOutside)="closeMenu()">
+                    <span class="led led-success" title="SP3 / PCLEARSF10-1"></span>
+                    <span class="account--title"> Minha Conta </span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<ec-user-actions [hidden]="!isMenuOpen"></ec-user-actions>

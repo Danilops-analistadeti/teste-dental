@@ -1,0 +1,24 @@
+<div class="back">
+  <a class="back__button" href="javascript:void(0)" routerLink="/">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    voltar
+  </a>
+</div>
+
+<div class="configuration">
+  <div class="nav">
+    <ul class="nav__list">
+      <li class="nav__item" [ngClass]="{'nav__item--active': this.activatedUrl === route.url}" [routerLink]="route.url"
+        *ngFor="let route of routes">
+        <mat-icon *ngIf="!route.icon.includes('ec_')">{{ route.icon }}</mat-icon>
+        <mat-icon *ngIf="route.icon.includes('ec_')" [svgIcon]="route.icon"></mat-icon>
+        {{ route.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+    <ec-footer-general></ec-footer-general>
+  </div>
+</div>

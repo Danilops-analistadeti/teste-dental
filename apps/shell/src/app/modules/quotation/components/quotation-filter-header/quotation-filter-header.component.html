@@ -1,0 +1,107 @@
+<div [formGroup]="form" class="filter-header">
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" multiple>
+        <mat-option *ngFor="let item of this.filterOperations?.listStatus; trackBy: trackByFn" [value]="item.key">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+      <span *ngIf="checkLength(this.form.get('status').value)" class="clean" matSuffix
+        (click)="this.form.get('status').reset()">x</span>
+    </mat-form-field>
+  </div>
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>id</mat-label>
+      <input type="number" class="no-selectors" formControlName="protocol" matInput>
+      <span *ngIf="this.form.get('protocol').value" class="clean--input" matSuffix
+        (click)="this.form.get('protocol').reset()">x</span>
+    </mat-form-field>
+  </div>
+
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Solicitante</mat-label>
+      <input type="text" formControlName="owner" matInput>
+      <span *ngIf="this.form.get('owner')?.value" class="clean--input" (click)="this.form.get('owner').reset()"
+        matSuffix>x</span>
+    </mat-form-field>
+  </div>
+
+  <div class="filter">
+    <ec-month-picker [form]="form" [startMonth]="dateControl.startDate" (changeValue)="changesMonthPicker($event)"
+      [endMonth]="dateControl.endDate">
+    </ec-month-picker>
+  </div>
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Operação</mat-label>
+      <mat-select formControlName="quotationType" multiple>
+        <mat-option *ngFor="let item of this.filterOperations?.listOperation; trackBy: trackByFn" [value]="item.key">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+      <span *ngIf="checkLength(this.form.get('quotationType').value)" class="clean" matSuffix
+        (click)="this.form.get('quotationType').reset()">x</span>
+    </mat-form-field>
+
+  </div>
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Submercado</mat-label>
+      <mat-select formControlName="subMarketRegion" multiple>
+        <mat-option *ngFor="let item of this.filterOperations?.listSubmarket; trackBy: trackByFn" [value]="item.key">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+      <span *ngIf="checkLength(this.form.get('subMarketRegion').value)" class="clean" matSuffix
+        (click)="this.form.get('subMarketRegion').reset()">x</span>
+    </mat-form-field>
+  </div>
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Fonte</mat-label>
+      <mat-select formControlName="energySource" multiple>
+        <mat-option *ngFor="let item of this.filterOperations?.listFont; trackBy: trackByFn" [value]="item.key">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+      <span *ngIf="checkLength(this.form.get('energySource').value)" class="clean" matSuffix
+        (click)="this.form.get('energySource').reset()">x</span>
+    </mat-form-field>
+  </div>
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Tipo de proposta</mat-label>
+      <mat-select formControlName="priceType" multiple>
+        <mat-option *ngFor="let item of this.filterOperations?.listTypeProposal; trackBy: trackByFn" [value]="item.key">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+      <span *ngIf="checkLength(this.form.get('priceType').value)" class="clean" matSuffix
+        (click)="this.form.get('priceType').reset()">x</span>
+    </mat-form-field>
+  </div>
+
+  <div class="filter">
+    <mat-form-field>
+      <mat-label>Volume MWméd</mat-label>
+      <input type="number" class="no-selectors" formControlName="energyVolumeAverage" matInput>
+      <span *ngIf="this.form.get('energyVolumeAverage').value" class="clean--input" matSuffix
+        (click)="this.form.get('energyVolumeAverage').reset()">x</span>
+    </mat-form-field>
+  </div>
+
+  <div class="reset-filter">
+    <span *ngIf="this.changeFilter" (click)="resetFilter()" class="align-self-center">restaurar filtros</span>
+  </div>
+
+</div>

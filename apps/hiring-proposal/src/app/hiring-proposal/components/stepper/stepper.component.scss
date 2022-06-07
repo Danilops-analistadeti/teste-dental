@@ -1,0 +1,59 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/var.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/colors.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font';
+
+.stepper {
+  height: 100%;
+
+  ::ng-deep {
+    .mat-form-field-prefix {
+      top: 0 !important;
+      span {
+        font-size: 16px;
+        letter-spacing: 0px;
+        color: #9b9b9b !important;
+        margin-right: 10px;
+      }
+    }
+
+    .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+      color: #000000;
+      font-weight: $bold;
+      opacity: inherit;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__black {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 27px;
+      white-space: pre-wrap;
+    }
+  }
+
+  &__text-position {
+    position: relative;
+    bottom: 39px;
+    left: 30%;
+    font-weight: $bold;
+    font-size: mat-font-size($config, subheading-1);
+  }
+
+  &__tolerance {
+    position: relative;
+    bottom: 20px;
+    font-weight: $bold;
+    font-size: mat-font-size($config, subheading-1);
+    color: $cerise;
+  }
+}

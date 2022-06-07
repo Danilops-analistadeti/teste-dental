@@ -1,0 +1,30 @@
+<div class="create-group">
+  <div class="create-group__title">
+    <span mat-dialog-title cdkFocusInitial>Grupo de fornecedores</span>
+    <div class="d-flex justify-content-end">
+      <mat-icon class="close" mat-dialog-close>close</mat-icon>
+    </div>
+  </div>
+
+  <form [formGroup]="createGroupForm">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="outline" class="mat-prefix">
+          <mat-label>Nome do grupo</mat-label>
+          <input matInput formControlName="name" autocomplete="off">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <ec-dual-list name="name" formControlName="companies"></ec-dual-list>
+
+    <div class="row mt-2 mb-2 d-flex justify-content-end">
+      <div class="col-2">
+        <button type="button" es-button [disabled]="!createGroupForm.valid" (click)="createGroup()">
+          Criar grupo
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

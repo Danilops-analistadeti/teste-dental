@@ -1,0 +1,159 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+
+.confirm-proposal {
+    margin-top: 2.5rem;
+
+    padding-right: 55px;
+    padding-left: 55px;
+
+    hr {
+        margin-right: 20px;
+        margin-left: -20px;
+        background: #9b9b9b;
+    }
+
+    &__title {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+
+        &--item {
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 0px;
+            color: $base-text;
+        }
+
+        &--title {
+            font-weight: 400;
+            font-size: 18px;
+            color: $base-text;
+            letter-spacing: 0px;
+        }
+    }
+
+    &__more-informations {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+
+        span {
+            text-align: left;
+            font-size: $font-md;
+            letter-spacing: 0px;
+            color: $base-text;
+        }
+
+        em {
+            font-style: normal;
+            text-align: left;
+            font-size: $font-md;
+            font-weight: $poppins-black;
+            letter-spacing: 0px;
+            color: $base-text;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        &--revised {
+            line-height: 50px;
+            align-self: center;
+            margin-bottom: 15px;
+            background: $base-text;
+        }
+    }
+
+    &__send {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.5rem;
+
+        span {
+            color: $base-text;
+            font-weight: $poppins-black;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        :not(:first-child) {
+            font-size: 18px !important;
+        }
+    }
+
+    &__offer-valid {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        margin-top: 0.5rem;
+        span {
+            font-weight: 300;
+            letter-spacing: 0px;
+            color: $base-text;
+        }
+
+        &--title {
+            font-size: $font-md;
+        }
+
+        &--subtitle {
+            font-size: $font-lg;
+        }
+    }
+
+    &--button {
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 25px;
+        opacity: 1;
+        height: 50px;
+        width: 400px;
+        font-size: $primary-fs;
+        font-weight: $poppins-semibold;
+        letter-spacing: 0px;
+        outline: none;
+        background: $cerise 0% 0% no-repeat padding-box;
+        border: $cerise;
+        color: $base-primary;
+    }
+}
+
+.cdk-overlay-pane.my-dialog {
+    position: relative !important;
+}
+
+.close.mat-button {
+    top: 0;
+    right: 0;
+    padding: 5px;
+    line-height: 14px;
+    min-width: auto;
+}
+
+.mat-dialog-title {
+    font-weight: $poppins-black;
+    font-size: 32px;
+    font-family: Poppins;
+    text-align: center;
+    letter-spacing: 0px;
+    color: $cerise;
+    opacity: 1;
+}
+
+.mat-slide-toggle-content {
+    text-transform: none !important;
+    white-space: break-spaces !important;
+}

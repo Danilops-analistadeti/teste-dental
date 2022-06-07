@@ -1,0 +1,75 @@
+@import '~@esferaenergia/esfera-ui/assets/styles/var.scss';
+@import '~@esferaenergia/esfera-ui/assets/styles/typography_font';
+@import '~@esferaenergia/esfera-ui/assets/styles/colors';
+
+.energy {
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.5rem;
+
+    &__through {
+      color: $cerise;
+      text-decoration: line-through;
+    }
+
+    &__green-water {
+      color: #4ac9a8;
+      margin-left: 5px;
+    }
+
+    &__subtitle {
+      font-style: normal;
+      font-weight: normal;
+      font-size: mat-font-size($config, body-1);
+      line-height: 16px;
+      color: #152536;
+    }
+
+    &--bold {
+      font-weight: $bold !important;
+    }
+
+    &__energy-volume {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &__cerise {
+        color: $cerise;
+        margin-right: 5px;
+      }
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-top: 1rem;
+
+      &__cerise {
+        color: $cerise;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  &__title {
+    font-weight: $bold;
+    font-size: mat-font-size($config, subheading-2);
+    line-height: 24px;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &__title {
+      font-style: normal;
+      font-weight: $bold;
+      font-size: mat-font-size($config, body-1);
+      line-height: 16px;
+      color: #8a8787;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<div class="multiple-agents">
+  <div class="multiple-agents__title">
+    <span>Multiplos agentes ({{owner?.length}})</span>
+    <mat-icon class="close" mat-dialog-close>close</mat-icon>
+  </div>
+
+  <div class="multiple-agents__item" *ngFor="let item of owner">
+    <span class="multiple-agents__item__title">
+      {{item.name}}
+    </span>
+    <div>
+      CNPJ:
+      <span class="multiple-agents__item__title">{{item.cnpj}}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+$rounded-size: 0.4rem;
+$oval-size: 2rem;
+
+.flat {
+    border-radius: 0;
+}
+
+.shape-rounded {
+    border-radius: $rounded-size;
+}
+
+.shape-oval {
+    border-radius: $oval-size;
+}
+
+.shape-circle {
+    border-radius: 50%;
+}

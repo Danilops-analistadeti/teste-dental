@@ -1,0 +1,62 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+
+.detail-expand {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  margin-top: -18px;
+  margin-bottom: 1rem;
+  min-height: 100px;
+  border-top: 1px solid #eceae8;
+}
+
+.billing-info-detail {
+  box-shadow: 0 2px 6px rgb(5 34 97 / 9%) !important;
+
+  table {
+    width: 100%;
+
+    tr, th, td {
+      border: none;
+    }
+
+    th {
+      font-weight: $bold;
+      font-size: $font-xs;
+      line-height: 18px;
+    }
+
+    td {
+      font-size: $primary-fs;
+      line-height: 24px;
+      font-weight: 500;
+    }
+
+    .mat-column-actionDetail, .mat-column-actionEdit {
+      font-weight: $bold;
+      font-size: $font-xs;
+      line-height: 18px;
+      color: #8A8787;
+      cursor: pointer;
+    }
+
+    .mat-column-actionDelete {
+      font-weight: $bold;
+      font-size: $font-xs;
+      line-height: 18px;
+      color: #E10B0B;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.align-not-billing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  es-icon {
+    width: 30px;
+    margin-right: 10px;
+  }
+}

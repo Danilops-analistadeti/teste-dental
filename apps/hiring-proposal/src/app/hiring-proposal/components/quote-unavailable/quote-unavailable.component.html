@@ -1,0 +1,17 @@
+<div class="quote-unavailable">
+  <img class="quote-unavailable__logo" src="/assets/images/logo-hud-energia.svg" />
+
+  <mat-card class="quote-unavailable__card" *ngIf=" state$ | async; let state">
+    <img src="/assets/images/lightBulbIcon.svg" />
+
+    <div class="d-flex flex-column">
+      <h1 class="quote-unavailable__card__title">
+        {{state?.message}}
+      </h1>
+
+      <span class="quote-unavailable__card__subtitle">
+        {{state?.subtitle}}
+      </span>
+    </div>
+  </mat-card>
+</div>

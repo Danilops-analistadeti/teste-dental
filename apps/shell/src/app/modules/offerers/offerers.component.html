@@ -1,0 +1,19 @@
+<es-virtual-list-template [height]="460" [page]="page" [itemSize]="50" [dataSource]="rows"
+  [refreshItemsSubscription]="subscription" (refreshItems)="load(lastQuery, $event)"
+  [loading]="!subscription?.closed && !rows.length || searching" (search)="load($event)">
+  <es-title>Ofertantes</es-title>
+  <es-subtitle>
+    Lista de empresas habilitadas pela CCEE que estão cadastradas hud Cotação com o perfil de ofertantes.
+    Caso não encontre alguma empresa de seu relacionamento poderá convidá-la.
+  </es-subtitle>
+
+  <es-menu>
+    <es-option name="Exportar Ofertantes" icon="file_upload" (action)="exportOfferers()"></es-option>
+  </es-menu>
+
+  <es-search label="Buscar Empresa" (search)="load($event)"></es-search>
+
+  <button es-button (click)="openInviteModal()">Enviar Convite</button>
+
+  <ec-offerers-item *ngFor="let row of rows" [offerer]="row"></ec-offerers-item>
+</es-virtual-list-template>

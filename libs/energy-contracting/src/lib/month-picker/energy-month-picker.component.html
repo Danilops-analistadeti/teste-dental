@@ -1,0 +1,158 @@
+<div ecClickOutSide class="month-picker" (clickOutside)="close()"
+  [class.month-picker-appearance-fill]="appearance === 'fill'"
+  [class.month-picker-appearance-outline]="appearance === 'outline'">
+  <ng-container
+    *ngIf="monthPickerForm?.get(startMonth).value; then monthValue; else appearance !== 'fill' ? outline : noValue">
+  </ng-container>
+  <div *ngIf="showMonthPicker; then monthPicker;"></div>
+  <span *ngIf="appearance === 'fill' && monthPickerForm?.get(startMonth).value && monthPickerForm?.get(endMonth).value"
+    class="clean" (click)="cleanForm()">x</span>
+</div>
+
+<ng-template #monthValue>
+  <ng-container *ngIf="appearance === 'fill'; then fill; else outline"></ng-container>
+</ng-template>
+
+<ng-template #fill>
+  <label class="title-value">{{label}}</label>
+  <label class="label-value" (click)="showMonthPicker = true">
+    {{ monthPickerForm?.get(startMonth).value | date: 'MMMyy' | esReplace:'[ .]':'/'}}
+    a {{ monthPickerForm?.get(endMonth).value | date: 'MMMyy' | esReplace:'[ .]':'/'}}</label>
+</ng-template>
+
+<ng-template #outline>
+  <div appearance="outline"
+    class="mat-form-field mat-primary mat-form-field-type-mat-select mat-form-field-appearance-outline mat-form-field-can-float mat-form-field-has-label mat-form-field-should-float w-100"
+    ng-reflect-appearance="outline"
+    [ngClass]="{'mat-form-Øfield-invalid ng-invalid ': monthPickerForm?.get(startMonth)?.hasError('required') && monthPickerForm?.get(startMonth)?.touched}">
+    <div class="mat-form-field-wrapper">
+      <div class="mat-form-field-flex">
+        <div class="mat-form-field-outline  ng-star-inserted">
+          <div class="mat-form-field-outline-start" style="width: 2.35004px;"></div>
+          <div class="mat-form-field-outline-gap" style="width: 156px"></div>
+          <div class="mat-form-field-outline-end"></div>
+        </div>
+        <div class="mat-form-field-outline mat-form-field-outline-thick  ng-star-inserted">
+          <div class="mat-form-field-outline-start " style="width: 2.35004px;"></div>
+          <div class="mat-form-field-outline-gap" style="width: 156px"></div>
+          <div class="mat-form-field-outline-end"></div>
+        </div>
+
+        <div class="mat-form-field-infix" (click)="touchMonthPicker()">
+          <div matInput>
+            <label class="d-flex align-items-center input--label m-0" esLabel>
+              <es-icon class="icon-md icon mr-2" matdatepickertoggleicon="" matprefix name="calendar">
+              </es-icon>
+              {{ monthPickerForm?.get(startMonth).value | date: 'MMMyy'  | esReplace:'[ .]':'/'}}
+              <span class="pl-1 pr-1" *ngIf="monthPickerForm.get(startMonth).value">a</span>
+              {{ monthPickerForm?.get(endMonth).value | date: 'MMMyy'  | esReplace:'[ .]':'/'}}
+            </label>
+          </div>
+
+          <span class="mat-form-field-label-wrapper">
+            <label class="mat-form-field-label ng-tns-c104-29 ng-star-inserted" ng-reflect-disabled="false"
+              id="mat-form-field-label-27" ng-reflect-ng-switch="true" for="energyVolumeAverage"
+              aria-owns="energyVolumeAverage">
+
+              <mat-label class="ng-tns-c104-29 ng-star-inserted">
+                {{label}}
+              </mat-label>
+              <span aria-hidden="true"
+                class="mat-placeholder-required mat-form-field-required-marker ng-tns-c104-29 ng-star-inserted">
+                *</span>
+            </label>
+          </span>
+        </div>
+
+        <div class="mat-form-field-suffix ng-tns-c104-23 ng-star-inserted">
+          <span matsuffix="" class="mat-suffix ng-tns-c104-23">
+            <span *ngIf="monthPickerForm?.get(startMonth).value" class="clean" (click)="cleanForm()"
+              class="clear-wrapper ng-star-inserted" title="Clear all">
+              <span aria-hidden="true" class="ng-clear">×</span></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="mat-form-field-subscript-wrapper" ng-reflect-ng-switch="hint">
+        <div class="ng-tns-c104-43 ng-trigger ng-trigger-transitionMessages ng-star-inserted"
+          style="opacity: 1; transform: translateY(0%);">
+          <mat-error role="alert" class="mat-error ng-tns-c104-43 ng-star-inserted" id="mat-error-10"
+            *ngIf="monthPickerForm?.get(startMonth)?.hasError('required') && monthPickerForm?.get(startMonth)?.touched">
+            Fornecimento
+            Inicial - Final é obrigatório</mat-error>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #noValue>
+  <label class="title-empty" (click)="showMonthPicker = true">Período</label>
+</ng-template>
+
+<ng-template #monthPicker>
+  <div [class.ajust-position-outline]="appearance === 'outline'" class="calendars">
+    <div class="calendar">
+      <ng-container *ngTemplateOutlet="header1"></ng-container>
+      <ng-container *ngTemplateOutlet="body1"></ng-container>
+    </div>
+    <div class="calendar">
+      <ng-container *ngTemplateOutlet="header2"></ng-container>
+      <ng-container *ngTemplateOutlet="body2"></ng-container>
+    </div>
+    <ng-container *ngTemplateOutlet="footer"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #header1>
+  <div class="header">
+    <div class="dowels" (click)="moveYear('down', true)">{{'<'}}</div>
+    <div class="year" [class.year-select]="isFirstYear()">{{ firstYear }}</div>
+    <div class="dowels" (click)="moveYear('up', true)">{{'>'}}</div>
+  </div>
+</ng-template>
+
+<ng-template #header2>
+  <div class="header">
+    <div class="dowels" (click)="moveYear('down', false)">{{'<'}}</div>
+    <div class="year" [class.year-select]="isFinalYear()">{{ finalYear }}</div>
+    <div class="dowels" (click)="moveYear('up', false)">{{'>'}}</div>
+  </div>
+</ng-template>
+
+<ng-template #body1>
+  <div class="body">
+    <div class="month" *ngFor="let month of getMonths()">
+      <button [class.range]="isRangeFirstCalendar(month.value)" [class.select]="isFirtSelectDate(month.value)"
+        type="button" (click)="selectMonth(month.value, true)"
+        [disabled]="isDisabledFirstCalendar(month.value)">{{ month.key }}</button>
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #body2>
+  <div class="body">
+    <div class="month" *ngFor="let month of getMonths()">
+      <button [class.range]="isRangeFinalCalendar(month.value)" [class.select]="isFinalSelectDate(month.value)"
+        type="button" (click)="selectMonth(month.value, false)"
+        [disabled]="isDisabledFinalCalendar(month.value)">{{ month.key }}</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #footer>
+  <div class="footer">
+    <button es-button size="sm" class="es-button btn-clean" (click)="cleanCalendar()" type="button"
+      [class.d-none]="!auxStartMonth || !auxEndMonth">
+      Limpar
+    </button>
+  </div>
+  <div class="footer">
+    <button es-button (click)="confirmSelect()" [disabled]="!auxStartMonth || !auxEndMonth"
+      [class.disabled-button]="!auxStartMonth || !auxEndMonth" type="button">
+      Selecionar
+    </button>
+  </div>
+</ng-template>

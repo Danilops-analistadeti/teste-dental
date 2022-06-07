@@ -1,0 +1,26 @@
+@import "~@esferaenergia/esfera-ui/assets/styles/typography_font.scss";
+@import "~@esferaenergia/esfera-ui/assets/styles/_colors.scss";
+
+.users {
+  &__header {
+    display: flex;
+    flex-direction: column;
+
+    &--bold {
+      font-size: 24px;
+      font-weight: $bold;
+      font-style: normal;
+      line-height: 36px;
+    }
+
+    &--smoke {
+      color: $white-smoke;
+    }
+
+    &--regular {
+      font-weight: $regular;
+      font-size: $font-sm;
+      line-height: 21px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+::ng-deep {
+  .card-item {
+    cursor: default !important;
+    font-weight: bold;
+    padding: 0 2em;
+  }
+}
+
+.loading {
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
